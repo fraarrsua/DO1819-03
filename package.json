@@ -1,0 +1,19 @@
+{
+  "name": "asas18-explorer",
+  "version": "1.0.0",
+  "description": "Proyecto ACME Explorer desarrollado para la asignatura Arquitectura para Software como Servicio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sojer23/ASAS18-Explorer-CloudTeam.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sojer23/ASAS18-Explorer-CloudTeam/issues"
+  },
+  "homepage": "https://github.com/Sojer23/ASAS18-Explorer-CloudTeam#readme"
+}
