@@ -1,19 +1,23 @@
 {
-  "name": "asas18-explorer",
+  "name": "l01-s01",
   "version": "1.0.0",
-  "description": "Proyecto ACME Explorer desarrollado para la asignatura Arquitectura para Software como Servicio",
-  "main": "index.js",
+  "description": "ACMEMarket REST API",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sojer23/ASAS18-Explorer-CloudTeam.git"
+    "url": "git+https://github.com/alejandrofdez-us/ACME-Market.git"
   },
-  "author": "",
+  "author": "afdez@us.es, cmuller@us.es",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Sojer23/ASAS18-Explorer-CloudTeam/issues"
+    "url": "https://github.com/alejandrofdez-us/ACME-Market/issues"
   },
-  "homepage": "https://github.com/Sojer23/ASAS18-Explorer-CloudTeam#readme"
+  "homepage": "https://github.com/alejandrofdez-us/ACME-Market#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.4.8"
+  }
 }
