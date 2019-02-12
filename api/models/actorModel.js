@@ -13,7 +13,15 @@ var ActorSchema = new Schema({
   },
   email: {
     type: String,
+    unique: true,
     required: 'Kindly enter the actor email'
+  },
+  phone: {
+    type: String
+  },
+  address:{
+    type: String,
+    required: 'Kindly enter the address'
   },
   password: {
     type: String,
@@ -24,26 +32,14 @@ var ActorSchema = new Schema({
     type : String,
     default : "en"
   },
-  phone: {
-    type: String,
-    required: 'Kindly enter the phone number'
-  },
-  address:{
-    type: String,
-    required: 'Kindly enter the address'
-  },
-  photo: {
+  /*photo: {
     data: Buffer, contentType: String
-  },
+  },*/
   role: [{
     type: String,
     required: 'Kindly enter the user role(s)',
-    enum: ['CUSTOMER', 'CLERK', 'ADMINISTRATOR']
+    enum: ['EXPLORER', 'MANAGER', 'ADMINISTRATOR']
   }],
-  validated:{
-    type: Boolean,
-    default: false
-  },
   created: {
     type: Date,
     default: Date.now

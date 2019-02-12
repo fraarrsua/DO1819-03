@@ -1,76 +1,76 @@
 'use strict';
 
-/*---------------ITEM----------------------*/
+/*---------------TRIP----------------------*/
 var mongoose = require('mongoose'),
-  Item = mongoose.model('Items');
+  Trip = mongoose.model('Trips');
 
-exports.list_all_items = function(req, res) {
+exports.list_all_trips = function(req, res) {
   //Check if the user is an administrator and if not: res.status(403); "an access token is valid, but requires more privileges"
-  Item.find(function(err, items) {
+  Trip.find(function(err, trips) {
     if (err){
       res.send(err);
     }
     else{
-      res.json(items);
+      res.json(trips);
     }
   });
 };
 
 
-exports.create_an_item = function(req, res) {
+exports.create_an_trip = function(req, res) {
   //Check if the user is an administrator and if not: res.status(403); "an access token is valid, but requires more privileges"
-  var new_item = new Item(req.body);
-  new_item.save(function(err, item) {
+  var new_trip = new Trip(req.body);
+  new_trip.save(function(err, trip) {
     if (err){
       res.send(err);
     }
     else{
-      res.json(item);
+      res.json(trip);
     }
   });
 };
 
-exports.search_items = function(req, res) {
+exports.search_trips = function(req, res) {
   //Check if category param exists (category: req.query.category)
   //Check if keyword param exists (keyword: req.query.keyword)
   //Search depending on params but only if deleted = false
-  console.log('Searching an item depending on params');
-  res.send('Item returned from the item search');
+  console.log('Searching an trip depending on params');
+  res.send('Trip returned from the trip search');
 };
 
 
-exports.read_an_item = function(req, res) {
-    Item.findById(req.params.itemId, function(err, item) {
+exports.read_an_trip = function(req, res) {
+    Trip.findById(req.params.tripId, function(err, trip) {
       if (err){
         res.send(err);
       }
       else{
-        res.json(item);
+        res.json(trip);
       }
     });
 };
 
 
-exports.update_an_item = function(req, res) {
+exports.update_an_trip = function(req, res) {
   //Check that the user is administrator if it is updating more things than comments and if not: res.status(403); "an access token is valid, but requires more privileges"
-    Item.findOneAndUpdate({_id: req.params.itemId}, req.body, {new: true}, function(err, item) {
+    Trip.findOneAndUpdate({_id: req.params.tripId}, req.body, {new: true}, function(err, trip) {
       if (err){
         res.send(err);
       }
       else{
-        res.json(item);
+        res.json(trip);
       }
     });
 };
 
-exports.delete_an_item = function(req, res) {
+exports.delete_an_trip = function(req, res) {
   //Check if the user is an administrator and if not: res.status(403); "an access token is valid, but requires more privileges"
-    Item.deleteOne({_id: req.params.itemId}, function(err, item) {
+    Trip.deleteOne({_id: req.params.tripId}, function(err, trip) {
         if (err){
             res.send(err);
         }
         else{
-            res.json({ message: 'Item successfully deleted' });
+            res.json({ message: 'Trip successfully deleted' });
         }
     });
 };

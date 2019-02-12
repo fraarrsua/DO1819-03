@@ -5,7 +5,8 @@ module.exports = function(app) {
   
   /**
    * Post an application 
-   *    RequiredRoles: to be a customer
+   *    RequiredRoles: to be a explorer 
+   *    RequiredStatus: tripStatus --> !STARTED & !CANCELLED
    *
    * @section applications
    * @type get post
@@ -13,7 +14,7 @@ module.exports = function(app) {
   */
   app.route('/v1/applications')
 	  .get(application.list_all_applications)
-	  //.post(application.create_an_application);
+	  .post(application.create_an_application);
   
 
 /**
@@ -30,16 +31,16 @@ module.exports = function(app) {
 
 
  /**
-   * 
-   * Get application of one userId
-   *
+   * Get an aplication giving applicationId
+   * Update an aplication giving applicationId
    * @section applications
-   * @type get
+   * @type get, put
    * @url /v1/applications/:applicationId
-   * @param {string} userId
+   * @param {string} applicationId
   */
  app.route('/v1/applications/:applicationId')
- .get(application.search_application);
+ .get(application.read_an_application)
+ .put(application.update_an_application);
 
 
   /**

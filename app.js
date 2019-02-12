@@ -3,8 +3,8 @@ var express = require('express'),
   port = process.env.PORT || 8080,
   mongoose = require('mongoose'),
   Actor = require('./api/models/actorModel'),
-  Item = require('./api/models/itemModel'),
-  Order = require('./api/models/orderModel'),
+  Trip = require('./api/models/tripModel'),
+  Application = require('./api/models/aplicationModel'),
   bodyParser = require('body-parser');
 
 // MongoDB URI building
