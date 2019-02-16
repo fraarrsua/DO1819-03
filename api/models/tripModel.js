@@ -29,7 +29,11 @@ var tripSchema = new Schema({
     required: 'Kindly enter the price of the trip',
     min: 0
   },
-  list_of_applications: [applications.aplication],
+  list_of_applications: [{
+    type: Schema.Types.ObjectId,
+    ref: "Applications",
+    required: 'aplications id required'
+  }],
   dateInit: {
     type: Date,
     required: 'Kindly enter the initial date of the trip'
@@ -43,6 +47,7 @@ var tripSchema = new Schema({
     ],
   stages: [StageSchema],
   comments: [CommentSchema],
+  sponsors: [SponsorshipSchema],
   created: {
     type: Date,
     default: Date.now
@@ -85,6 +90,41 @@ var CommentSchema = new Schema({
 }, { strict: false });
 
 
+//SponsorshipModel
+
+var SponsorshipSchema = new Schema({
+  sponsorId:{
+    type: Schema.Types.ObjectId,
+    ref: "Actor",
+    required: 'sponsor actor id required'
+  },
+  tripId:{
+    type: Schema.Types.ObjectId,
+    ref: "Trips",
+    required: 'trip id required'
+  },
+  banner:{
+    data: Buffer, 
+    contentType: String,
+    required: 'Banner is required'
+  },
+  link:{
+    type: String,
+    required: 'Link is required'
+  },
+  paid:{
+    type: Boolean,
+    default: false,
+    required: 'Paid status is required'
+  },
+  price:{
+    type: Number,
+    default: 0,
+    required: 'Sponsorship price is required'
+  }
+}, { strict: false });
+
+
 // Execute before each trip.save() call
 tripSchema.pre('save', function(callback) {
   var new_trip = this;
@@ -98,4 +138,6 @@ tripSchema.pre('save', function(callback) {
 
 module.exports = mongoose.model('trips', tripSchema);
 module.exports = mongoose.model('stages', StageSchema);
-module.exports = mongoose.model('stages', CommentSchema);
+module.exports = mongoose.model('comments', CommentSchema);
+module.exports = mongoose.model('sponsorships', SponsorshipSchema);
+

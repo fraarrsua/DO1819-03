@@ -32,13 +32,20 @@ var ActorSchema = new Schema({
     type : String,
     default : "en"
   },
-  /*photo: {
-    data: Buffer, contentType: String
-  },*/
   role: [{
     type: String,
     required: 'Kindly enter the user role(s)',
-    enum: ['EXPLORER', 'MANAGER', 'ADMINISTRATOR']
+    enum: ['EXPLORER', 'MANAGER', 'ADMINISTRATOR', 'SPONSOR']
+  }],
+  banned:{
+    type: Boolean,
+    required: 'Banned status is required',
+    defaul: false
+  },
+  search:[{
+    type: Schema.Types.ObjectId,
+    ref: 'Searchs',
+    default: null
   }],
   created: {
     type: Date,
