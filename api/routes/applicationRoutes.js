@@ -4,6 +4,9 @@ module.exports = function(app) {
   
   
   /**
+   * Get all applications
+   *    RequiredRoles: to be a manager
+   * 
    * Post an application 
    *    RequiredRoles: to be a explorer 
    *    RequiredStatus: tripStatus --> !STARTED & !CANCELLED
@@ -20,6 +23,7 @@ module.exports = function(app) {
 /**
    * 
    * Get applications by userId
+   *    RequiredRole: to be an Explorer
    *
    * @section applications
    * @type get
@@ -33,6 +37,7 @@ module.exports = function(app) {
  /**
    * Get an aplication giving applicationId
    * Update an aplication giving applicationId
+   *      RequiredRole: To be a Manager
    * @section applications
    * @type get, put
    * @url /v1/applications/:applicationId
@@ -42,7 +47,7 @@ module.exports = function(app) {
  .get(application.read_an_application)
  .put(application.update_an_application);
 
-
+/*
   /**
    * Search engine for applications
    * Get applications depending on params
@@ -55,7 +60,7 @@ module.exports = function(app) {
    * @param {string} asigned (true|false)
    * @param {string} delivered (true|false)
   */
-  app.route('/v1/applications/search')
+  /*app.route('/v1/applications/search')
     .get(application.search_applications);
 
 
@@ -72,7 +77,7 @@ module.exports = function(app) {
    * @type put delete
    * @url /v1/applications/:applicationId
   */
-  app.route('/v1/applications/:applicationId')
+  /*app.route('/v1/applications/:applicationId')
     .get(application.read_an_application) 
     .put(application.update_an_application) 
     .delete(application.delete_an_application);
@@ -85,6 +90,6 @@ module.exports = function(app) {
    * @type get
    * @url /v1/myapplications/:actorId
   */
-  app.route('/v1/myapplications')
-    .get(application.list_my_applications); //añadir ownership para el CONSUMER
+  /*app.route('/v1/myapplications')
+    .get(application.list_my_applications); //añadir ownership para el CONSUMER*/
 };

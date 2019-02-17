@@ -5,12 +5,13 @@ module.exports = function(app) {
   /**
    * Manage catalogue of trips: 
    * Post trips
-   *    RequiredRoles: Administrator
+   *    RequiredRoles: Manager
+   *    tripStatus --> UNPUBLISHED
    * Get trips 
-   *    RequiredRoles: Administrator
+   *    RequiredRoles: Manager
    *
    * @section trips
-   * @type put 
+   * @type get post 
    * @url /v1/trips
   */
   app.route('/v1/trips')
@@ -18,12 +19,16 @@ module.exports = function(app) {
     .post(trips.create_an_trip);
 
   /**
-   * Put comments on an trip or update it
-   *    RequiredRoles: any (comment); administrator if any other update
-   * Delete an trip
-   *    RequiredRoles: Administrator
-   * Get an trip
-   *    RequiredRoles: any
+   * Put a trip or update it
+   *    RequiredRoles: Manager
+   *    RequiredStatus: tripStatus --> UNPUBLISHED
+   *     
+   * Delete a trip
+   *    RequiredRoles: Manager
+   *    RequiredStatus: tripStatus --> UNPUBLISHED
+   * 
+   * Get a trip
+   *    RequiredRoles: Manager
    * 
    * @section trips
    * @type get put delete 
