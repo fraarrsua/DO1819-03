@@ -32,14 +32,13 @@ var ActorSchema = new Schema({
     type : String,
     default : "en"
   },
-  role: [{
+  role: {
     type: String,
-    required: 'Kindly enter the user role(s)',
+    required: 'Kindly enter the user role',
     enum: ['EXPLORER', 'MANAGER', 'ADMINISTRATOR', 'SPONSOR']
-  }],
+  },
   banned:{
     type: Boolean,
-    required: 'Banned status is required',
     defaul: false
   },
   search:[{

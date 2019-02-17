@@ -76,9 +76,9 @@ exports.delete_an_trip = function(req, res) {
 };
 
 
-/*---------------CATEGORY----------------------*/
+/*---------------STAGE----------------------*/
 var mongoose = require('mongoose'),
-  Category = mongoose.model('Categories');
+  Stage = mongoose.model('Stages');
 
 exports.list_all_categories = function(req, res) {
   Category.find({}, function(err, categs) {
@@ -136,3 +136,7 @@ exports.delete_a_category = function(req, res) {
     }
   });
 };
+
+
+/*---------------SPONSORSHIP----------------------*/
+var Sponsorship = mongoose.model('Sponsorships');

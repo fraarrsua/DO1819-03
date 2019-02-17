@@ -29,7 +29,7 @@ module.exports = function(app) {
 	 * @url /v1/actors/:actorId
   */  
   app.route('/v1/actors/:actorId')
-    //.get(actors.read_an_actor)
+    .get(actors.read_an_actor)
 	  .put(actors.update_an_actor)
     //.delete(actors.delete_an_actor);
 
@@ -42,6 +42,6 @@ module.exports = function(app) {
 	 * @url /v1/actors/:actorId/validate
 	 * @param {string} actorId
 	*/
-  /*app.route('/v1/actors/:actorId/validate')
-  .put(actors.validate_an_actor)*/
+  app.route('/v1/actors/:actorId/ban')
+  .put(actors.ban_an_actor)
 };

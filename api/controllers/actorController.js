@@ -3,85 +3,84 @@
 var mongoose = require('mongoose'),
   Actor = mongoose.model('Actors');
 
-exports.list_all_actors = function(req, res) {
-    //Check if the role param exist
-    var roleName;
-    if(req.query.role){
-        roleName=req.query.role;
-      }
-    //Adapt to find the actors with the specified role
-    Actor.find({}, function(err, actors) {
-        if (err){
-          res.send(err);
-        }
-        else{
-            res.json(actors);
-        }
-    });
-};
+exports.create_an_actor = function (req, res) {
 
-exports.create_an_actor = function(req, res) {
+  console.log(Date() + ": " + "POST /v1/actors");
   var new_actor = new Actor(req.body);
-  // If new_actor is a customer, validated = true;
-  // If new_actor is a clerk, validated = false;
-  if ((new_actor.role.includes( 'CLERK' ))) {
-    new_actor.validated = false;
-  } else {
-    new_actor.validated = true;
-  }
-  new_actor.save(function(err, actor) {
-    if (err){
+
+  new_actor.save(function (err, actor) {
+    if (err) {
+      console.log(Date() + ": " + err);
       res.send(err);
     }
-    else{
-      res.json(actor);
+    else {
+      console.log(Date() + ": " + "New actor with role: '" + actor.role + "' added.");
+      res.status(201).send(actor);
     }
   });
 };
 
-exports.read_an_actor = function(req, res) {
-  Actor.findById(req.params.actorId, function(err, actor) {
-    if (err){
+exports.read_an_actor = function (req, res) {
+
+  console.log(Date() + ": " + "GET /v1/actors/:actorId");
+
+  Actor.findById(req.params.actorId, function (err, actor) {
+    if (err) {
+      console.log(Date() + ": " + err);
       res.send(err);
     }
-    else{
-      res.json(actor);
+    else {
+      console.log(Date() + ": " + "Actor returned: '" + actor.name + actor.surname + ".");
+      res.status(200).send(actor);
     }
   });
 };
 
-exports.update_an_actor = function(req, res) {
-    //Check that the user is the proper actor and if not: res.status(403); "an access token is valid, but requires more privileges"
-    Actor.findOneAndUpdate({_id: req.params.actorId}, req.body, {new: true}, function(err, actor) {
-        if (err){
-            res.send(err);
-        }
-        else{
-            res.json(actor);
-        }
-    });
+exports.update_an_actor = function (req, res) {
+
+  console.log(Date() + ": " + "PUT /v1/actors/:"+ req.params);
+  var actorId = req.params.actorId;
+  //We must validate that the body is correct with our ActorSchema
+  var actorUpdated = (req.body);
+
+  Actor.findOneAndUpdate({ _id: actorId }, actorUpdated, { new: true }, function (err, actor) {
+    if (err) {
+      console.log(Date() + ": " + err);
+      res.send(err);
+    }
+    else {
+      console.log(Date() + ": " + "Actor updated: '" + actor.name +", "+ actor.surname + ".");
+      res.status(200).send(actor);
+    }
+  });
 };
 
-exports.validate_an_actor = function(req, res) {
-    //Check that the user is an Administrator and if not: res.status(403); "an access token is valid, but requires more privileges"
-    console.log("Validating an actor with id: "+req.params.actorId)
-    Actor.findOneAndUpdate({_id: req.params.actorId},  { $set: {"validated": "true" }}, {new: true}, function(err, actor) {
-      if (err){
-        res.send(err);
-      }
-      else{
-        res.json(actor);
-      }
-    });
-  };
+exports.ban_an_actor = function (req, res) {
 
-exports.delete_an_actor = function(req, res) {
-    Actor.deleteOne({_id: req.params.actorId}, function(err, actor) {
-        if (err){
+  console.log(Date() + ": " + "PUT /v1/actors/:actorId/ban");
+
+  var actorToBanId = req.params.actorId;
+  Actor.findById(actorToBanId, function (err, actorToBan) {
+    if (err) {
+      console.log(Date() + ": " + err);
+      res.send(err);
+    } else {
+      if (actorToBan.role != "EXPLORER") {
+        console.log(Date() + ": " + " WARNING. Trying to ban an actor with role: " + actorToBan.role + ".")
+        res.sendStatus(403);
+      } else {
+        Actor.findOneAndUpdate({ _id: req.params.actorId }, { $set: { "banned": "true" } }, { new: true }, function (err, actor) {
+          if (err) {
+            console.log(Date() + ": " + err);
             res.send(err);
-        }
-        else{
-            res.json({ message: 'Actor successfully deleted' });
-        }
-    });
+          }
+          else {
+            console.log(Date() + ": " + "Actor with email: '" + actor.email + " is now banned.");
+            res.status(200).send(actor);
+          }
+        });
+      }
+    }
+
+  });
 };

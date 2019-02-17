@@ -4,7 +4,7 @@ var express = require('express'),
   mongoose = require('mongoose'),
   Actor = require('./api/models/actorModel'),
   Trip = require('./api/models/tripModel'),
-  Application = require('./api/models/aplicationModel'),
+  Application = require('./api/models/applicationModel'),
   bodyParser = require('body-parser');
 
 // MongoDB URI building
