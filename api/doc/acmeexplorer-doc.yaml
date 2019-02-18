@@ -82,7 +82,7 @@ paths:
     put:
       tags:
         - Actor
-      summary: Updated actor
+      summary: Update actor
       description: This can only be done by the logged in user.
       operationId: update_an_actor
       produces:
@@ -97,6 +97,34 @@ paths:
         - in: body
           name: body
           description: Updated actor object
+          required: true
+          schema:
+            $ref: '#/definitions/Actor'
+      responses:
+        '400':
+          description: Invalid actor ID supplied
+        '404':
+          description: Actor not found
+      x-swagger-router-controller: Actor
+  /actors/{actorId}/ban:
+    put:
+      tags:
+        - Actor
+      summary: Ban an actor
+      description: This can only be done by the logged in user.
+      operationId: ban_an_actor
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: actorId
+          in: path
+          description: Ban an actor by ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Ban an actor object
           required: true
           schema:
             $ref: '#/definitions/Actor'
@@ -315,7 +343,7 @@ paths:
     put:
       tags:
         - Application
-      summary: Updated trip
+      summary: Update trip
       description: This can only be done by the authorized user.
       operationId: update_an_application
       produces:
