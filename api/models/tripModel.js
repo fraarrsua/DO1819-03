@@ -4,7 +4,6 @@ var Schema = mongoose.Schema;
 var nanoid = require('nanoid');
 const generate = nanoid.generate;
 const dateFormat = require('dateformat');
-var applications = require('./applicationModel');
 
 var StageSchema = new Schema({
   title: {
@@ -40,40 +39,6 @@ var CommentSchema = new Schema({
   }
 }, { strict: false });
 
-
-//SponsorshipModel
-
-var SponsorshipSchema = new Schema({
-  sponsorId:{
-    type: Schema.Types.ObjectId,
-    ref: "Actor",
-    required: 'sponsor actor id required'
-  },
-  tripId:{
-    type: Schema.Types.ObjectId,
-    ref: "Trips",
-    required: 'trip id required'
-  },
-  banner:{
-    data: Buffer, 
-    contentType: String
-  },
-  link:{
-    type: String,
-    required: 'Link is required'
-  },
-  paid:{
-    type: Boolean,
-    default: false,
-    required: 'Paid status is required'
-  },
-  price:{
-    type: Number,
-    default: 0,
-    required: 'Sponsorship price is required'
-  }
-}, { strict: false });
-
 var tripSchema = new Schema({
   ticker: {
     type: String,
@@ -92,6 +57,9 @@ var tripSchema = new Schema({
   description: {
     type: String,
     required: 'Kindly enter the description of the trip'
+  },
+  cancelledReason: {
+    type: String  
   },
   price: {
     type: Number,
@@ -116,7 +84,11 @@ var tripSchema = new Schema({
   ],
   stages: [StageSchema],
   comments: [CommentSchema],
-  sponsors: [SponsorshipSchema],
+  sponsors: [{
+    type: Schema.Types.ObjectId,
+    ref: "Sponsorships",
+    required: 'sponsorship id required'
+  }],
   created: {
     type: Date,
     default: Date.now
@@ -133,10 +105,14 @@ tripSchema.pre('save', function(callback) {
 
   var generated_ticker = [day, generate('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 6)].join('-')
   new_trip.ticker = generated_ticker;
+
+  //Compute the total price
+  new_trip.stages.forEach(e => {
+    new_trip.price += e.price
+  });
   callback();
 });
 
 module.exports = mongoose.model('Trips', tripSchema);
 module.exports = mongoose.model('Stages', StageSchema);
-module.exports = mongoose.model('Sponsorships', SponsorshipSchema);
 

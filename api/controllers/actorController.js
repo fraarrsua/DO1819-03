@@ -38,7 +38,7 @@ exports.read_an_actor = function (req, res) {
 
 exports.update_an_actor = function (req, res) {
 
-  console.log(Date() + ": " + "PUT /v1/actors/:"+ req.params);
+  console.log(Date() + ": " + "PUT /v1/actors/:"+ req.params.actorId);
   var actorId = req.params.actorId;
   //We must validate that the body is correct with our ActorSchema
   var actorUpdated = (req.body);
