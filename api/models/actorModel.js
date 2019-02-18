@@ -30,7 +30,7 @@ var ActorSchema = new Schema({
   },
   preferredLanguage:{
     type : String,
-    default : "en"
+    default : 'en'
   },
   role: {
     type: String,

@@ -66,11 +66,6 @@ var tripSchema = new Schema({
     required: 'Kindly enter the price of the trip',
     min: 0
   },
-  list_of_applications: [{
-    type: Schema.Types.ObjectId,
-    ref: "Applications",
-    required: 'aplications id required'
-  }],
   dateInit: {
     type: Date,
     required: 'Kindly enter the initial date of the trip'

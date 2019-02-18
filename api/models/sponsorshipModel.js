@@ -25,11 +25,6 @@ var SponsorshipSchema = new Schema({
       type: Boolean,
       default: false,
       required: 'Paid status is required'
-    },
-    price:{
-      type: Number,
-      default: 0,
-      required: 'Sponsorship price is required'
     }
   }, { strict: false });
   

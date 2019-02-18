@@ -8,6 +8,7 @@ exports.list_all_applications = function(req, res) {
 
   Application.find({}, function(err, order) {
     if (err){
+      console.log(Date() + ": " + err);
       res.send(err);
     }
     else{
@@ -16,13 +17,14 @@ exports.list_all_applications = function(req, res) {
   });
 };
 
-exports.list_my_orders = function(req, res) {
-  Application.find(function(err, orders) {
+exports.list_my_applications = function(req, res) {
+  Application.find(function(err, applications) {
     if (err){
+      console.log(Date() + ": " + err);
       res.send(err);
     }
     else{
-      res.json(orders);
+      res.status(200).json(applications);
     }
   });
 };
@@ -74,11 +76,13 @@ exports.update_an_application = function(req, res) {
   //Check the conditions of the applications and who is the role
   Application.findById(req.params.applicationId, function(err, order) {
       if (err){
+        console.log(Date() + ": " + err);
         res.send(err);
       }
       else{
           Application.findOneAndUpdate({_id: req.params.applicationId}, req.body, {new: true}, function(err, application) {
             if (err){
+              console.log(Date() + ": " + err);
               res.send(err);
             }
             else{
@@ -91,7 +95,7 @@ exports.update_an_application = function(req, res) {
 };
 
 
-exports.delete_an_order = function(req, res) {
+/*exports.delete_an_application = function(req, res) {
   //Check if the order were delivered or not and delete it or not accordingly
   //Check if the user is the proper customer that posted the order and if not: res.status(403); "an access token is valid, but requires more privileges"
   Application.deleteOne({
@@ -104,4 +108,4 @@ exports.delete_an_order = function(req, res) {
       res.json({ message: 'Application successfully deleted' });
     }
   });
-};
+};*/
