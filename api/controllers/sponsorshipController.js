@@ -34,7 +34,7 @@ exports.create_a_sponsorship = function (req, res) {
             res.send(err);
         } else {
             console.log(Date() + ": " + "New Sponsorship with id:'" + sponsorship._id + "' created.");
-            res.status(200).send(sponsorship);
+            res.status(201).send(sponsorship);
         }
     });
 }

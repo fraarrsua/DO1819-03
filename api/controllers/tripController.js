@@ -31,7 +31,6 @@ exports.create_a_trip = function(req, res) {
 };
 
 exports.search_trips = function(req, res) {
-  //Check if category param exists (category: req.query.category)
   //Check if keyword param exists (keyword: req.query.keyword)
   //Search depending on params but only if deleted = false
   console.log('Searching an trip depending on params');
@@ -80,7 +79,7 @@ exports.delete_a_trip = function(req, res) {
 var mongoose = require('mongoose'),
   Stage = mongoose.model('Stages');
 
-exports.list_all_categories = function(req, res) {
+exports.list_all_stages = function(req, res) {
   Category.find({}, function(err, categs) {
     if (err){
       res.send(err);
@@ -91,7 +90,7 @@ exports.list_all_categories = function(req, res) {
   });
 };
 
-exports.create_a_category = function(req, res) {
+exports.create_a_stage = function(req, res) {
   var new_categ = new Category(req.body);
   new_categ.save(function(err, categ) {
     if (err){
@@ -104,8 +103,8 @@ exports.create_a_category = function(req, res) {
 };
 
 
-exports.read_a_category = function(req, res) {
-  Category.findById(req.params.categId, function(err, categ) {
+exports.read_a_stage = function(req, res) {
+  Category.findById(req.params.stageId, function(err, stage) {
     if (err){
       res.send(err);
     }
@@ -115,24 +114,24 @@ exports.read_a_category = function(req, res) {
   });
 };
 
-exports.update_a_category = function(req, res) {
-  Category.findOneAndUpdate({_id: req.params.categId}, req.body, {new: true}, function(err, categ) {
+exports.update_a_stage = function(req, res) {
+  Category.findOneAndUpdate({_id: req.params.stageId}, req.body, {new: true}, function(err, stage) {
     if (err){
       res.send(err);
     }
     else{
-      res.json(categ);
+      res.json(stage);
   }
   });
 };
 
-exports.delete_a_category = function(req, res) {
-  Category.deleteOne({_id: req.params.categId}, function(err, categ) {
+exports.delete_a_stage = function(req, res) {
+  Category.deleteOne({_id: req.params.stageId}, function(err, stage) {
     if (err){
       res.send(err);
     }
     else{
-      res.json({ message: 'Category successfully deleted' });
+      res.json({ message: 'Stage successfully deleted' });
     }
   });
 };

@@ -1,0 +1,651 @@
+swagger: '2.0'
+info:
+  description: This is a sample server of ACME Explorer Application.
+  version: 1.0.0
+  title: ACME EXPLORER
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: acme.explorer.io
+basePath: /v1
+schemes:
+  - https
+  - http
+paths:
+  /actors:
+    get:
+      tags:
+        - Actor
+      summary: Return all actors
+      description: ''
+      operationId: list_all_actors
+      produces:
+        - application/xml
+        - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: Actor
+    post:
+      tags:
+        - Actor
+      summary: Add a new actor
+      description: ''
+      operationId: create_an_actor
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Actor object that needs to be added to the Acme Explorer
+          required: true
+          schema:
+            $ref: '#/definitions/Actor'
+      responses:
+        '405':
+          description: Invalid input
+      x-swagger-router-controller: Actor
+  /actors/{actorId}:
+    get:
+      tags:
+        - Actor
+      summary: Find actor by ID
+      description: Returns a single actor
+      operationId: read_an_actor
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: actorId
+          in: path
+          description: ID of actor to return
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Actor'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Actor not found
+      x-swagger-router-controller: Actor
+    put:
+      tags:
+        - Actor
+      summary: Updated actor
+      description: This can only be done by the logged in user.
+      operationId: update_an_actor
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: actorId
+          in: path
+          description: Actor Id that need to be updated
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Updated actor object
+          required: true
+          schema:
+            $ref: '#/definitions/Actor'
+      responses:
+        '400':
+          description: Invalid actor ID supplied
+        '404':
+          description: Actor not found
+      x-swagger-router-controller: Actor
+  /trips:
+    get:
+      tags:
+        - Trip
+      summary: Return all trips
+      description: ''
+      operationId: list_all_trips
+      produces:
+        - application/xml
+        - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: Trips
+    post:
+      tags:
+        - Trip
+      summary: Add a new trip
+      description: ''
+      operationId: create_an_trip
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Trip object that needs to be added to the Acme Explorer
+          required: true
+          schema:
+            $ref: '#/definitions/Trip'
+      responses:
+        '405':
+          description: Invalid input
+      x-swagger-router-controller: Trips
+  /trips/{tripId}:
+    get:
+      tags:
+        - Trip
+      summary: Find trip by ID
+      description: Returns a single trip
+      operationId: read_a_trip
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: tripId
+          in: path
+          description: ID of trip to return
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Trip'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Trip not found
+      x-swagger-router-controller: Trips
+    put:
+      tags:
+        - Trip
+      summary: Update a trip
+      description: This can only be done by the authorized user.
+      operationId: update_a_trip
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: tripId
+          in: path
+          description: Trip Id that needs to be updated
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Updated trip object
+          required: true
+          schema:
+            $ref: '#/definitions/Trip'
+      responses:
+        '400':
+          description: Invalid trip ID supplied
+        '404':
+          description: Trip not found
+      x-swagger-router-controller: Trips
+    delete:
+      tags:
+        - Trip
+      summary: Deletes a trip
+      description: ''
+      operationId: delete_a_trip
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: api_key
+          in: header
+          required: false
+          type: string
+        - name: tripId
+          in: path
+          description: Trip id to delete
+          required: true
+          type: string
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Trip not found
+      x-swagger-router-controller: Trips
+  /applications:
+    get:
+      tags:
+        - Application
+      summary: Return list of all applications
+      description: ''
+      operationId: list_all_applications
+      produces:
+        - application/xml
+        - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: Applications
+    post:
+      tags:
+        - Application
+      summary: Add a new application
+      description: ''
+      operationId: create_an_application
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Application object that needs to be added to the Acme Explorer
+          required: true
+          schema:
+            $ref: '#/definitions/Application'
+      responses:
+        '405':
+          description: Invalid input
+      x-swagger-router-controller: Applications
+  /applications/{userId}:
+    get:
+      tags:
+        - Application
+      summary: Find application by User ID
+      description: Returns a application by User ID
+      operationId: search_user_applications
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user to return by its application
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Application'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Application not found
+      x-swagger-router-controller: Applications
+  /applications/applicationId:
+    get:
+      tags:
+        - Application
+      summary: Find application by applicationID
+      description: Returns an application by applicationID
+      operationId: read_an_application
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: applicationId
+          in: path
+          description: ID of application to return an application
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Application'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Application not found
+      x-swagger-router-controller: Applications
+    put:
+      tags:
+        - Application
+      summary: Updated trip
+      description: This can only be done by the authorized user.
+      operationId: update_an_application
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: applicationId
+          in: path
+          description: Trip Id that needs to be updated
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Updated trip object
+          required: true
+          schema:
+            $ref: '#/definitions/Application'
+      responses:
+        '400':
+          description: Invalid trip ID supplied
+        '404':
+          description: Application not found
+      x-swagger-router-controller: Applications
+  /sponsorships:
+    get:
+      tags:
+        - Sponsorship
+      summary: Return all sponsorships
+      description: ''
+      operationId: list_all_sponsorships
+      produces:
+        - application/xml
+        - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: Sponsorships
+    post:
+      tags:
+        - Sponsorship
+      summary: Add a new sponsorship
+      description: ''
+      operationId: create_a_sponsorship
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Sponsorship object that needs to be added to the Acme Explorer
+          required: true
+          schema:
+            $ref: '#/definitions/Trip'
+      responses:
+        '405':
+          description: Invalid input
+      x-swagger-router-controller: Trips
+  /sponsorships/{sponsorshipId}:
+    get:
+      tags:
+        - Sponsorship
+      summary: Find sponsorship by ID
+      description: Returns a single sponsorship
+      operationId: read_a_sponsorship
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: sponsorshipId
+          in: path
+          description: ID of sponsorship to return
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Sponsorship'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Sponsorship not found
+      x-swagger-router-controller: Sponsorships
+    put:
+      tags:
+        - Sponsorship
+      summary: Update a sponsorship
+      description: This can only be done by the authorized user.
+      operationId: update_a_sponsorship
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: sponsorshipId
+          in: path
+          description: sponsorshipId that needs to be updated
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Update sponsorship object
+          required: true
+          schema:
+            $ref: '#/definitions/Sponsorship'
+      responses:
+        '400':
+          description: Invalid sponsorship ID supplied
+        '404':
+          description: Sponsorship not found
+      x-swagger-router-controller: Sponsorships
+    delete:
+      tags:
+        - Sponsorship
+      summary: Delete a sponsorship
+      description: ''
+      operationId: delete_a_sponsorship
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: api_key
+          in: header
+          required: false
+          type: string
+        - name: sponsorshipId
+          in: path
+          description: Sponsorship id to delete
+          required: true
+          type: string
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Sponsorship not found
+      x-swagger-router-controller: Sponsorships
+definitions:
+  Actor:
+    type: object
+    required:
+      - address
+      - banned
+      - created
+      - email
+      - name
+      - password
+      - phone
+      - preferredLanguage
+      - role
+      - search
+      - surname
+    properties:
+      name:
+        type: string
+      surname:
+        type: string
+      email:
+        type: string
+        minLength: 1
+      phone:
+        type: string
+        minLength: 1
+      address:
+        type: string
+      password:
+        type: string
+        minLength: 1
+      preferredLanguage:
+        type: string
+        minLength: 1
+      role:
+        type: number
+      banned:
+        type: boolean
+      search:
+        type: object
+        properties: {}
+      created:
+        type: string
+        format: date
+    example:
+      password: password
+      preferredLanguage: preferredLanguage
+      search: '{}'
+      address: address
+      role: 0.8008281904610115
+      phone: phone
+      surname: surname
+      created: '2000-01-23'
+      name: name
+      banned: true
+      email: email
+  Application:
+    type: object
+    required:
+      - cancelationMoment
+      - comments
+      - consumerName
+      - dateApplication
+      - datePayment
+      - explorerId
+      - managerId
+      - status
+      - tripId
+    properties:
+      status:
+        type: string
+      consumerName:
+        type: string
+      dateApplication:
+        type: string
+        format: date
+      datePayment:
+        type: string
+        format: date
+      cancelationMoment:
+        type: string
+        format: date
+      comments:
+        type: number
+      explorerId:
+        type: object
+        properties: {}
+      tripId:
+        type: object
+        properties: {}
+      managerId:
+        type: object
+        properties: {}
+    example:
+      cancelationMoment: '2000-01-23'
+      dateApplication: '2000-01-23'
+      comments: 0.8008281904610115
+      trip: '{}'
+      manager: '{}'
+      explorer: '{}'
+      status: status
+      consumerName: consumerName
+      datePayment: '2000-01-23'
+  Trip:
+    type: object
+    required:
+      - comments
+      - created
+      - dateEnd
+      - dateInit
+      - description
+      - list_of_applications
+      - pictures
+      - price
+      - sponsors
+      - stages
+      - ticker
+      - title
+    properties:
+      ticker:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      price:
+        type: number
+      list_of_applications:
+        type: object
+        properties: {}
+      dateInit:
+        type: string
+        format: date
+      dateEnd:
+        type: string
+        format: date
+      pictures:
+        type: object
+        properties: {}
+      stages:
+        type: object
+        properties: {}
+      comments:
+        type: object
+        properties: {}
+      sponsors:
+        type: object
+        properties: {}
+      created:
+        type: string
+        format: date
+    example:
+      ticker: ticker
+      list_of_applications: '{}'
+      comments: '{}'
+      price: 0.8008281904610115
+      sponsors: '{}'
+      created: '2000-01-23'
+      dateInit: '2000-01-23'
+      stages: '{}'
+      description: description
+      dateEnd: '2000-01-23'
+      title: title
+      pictures: '{}'
+  Sponsorship:
+    type: object
+    required:
+      - banner
+      - link
+      - paid
+      - price
+      - sponsorId
+      - tripId
+    properties:
+      banner:
+        type: object
+        properties: {}
+      link:
+        type: string
+      paid:
+        type: boolean
+      price:
+        type: number
+      sponsorId:
+        type: number
+      tripId:
+        type: number
+    example:
+      banner: {}
+      link: acmerexplorer.swagger.io
+      paid: true
+      price: 654121
+      sponsordId: 4238795
+      tripId: 51238

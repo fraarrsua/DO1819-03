@@ -5,6 +5,7 @@ var express = require('express'),
   Actor = require('./api/models/actorModel'),
   Trip = require('./api/models/tripModel'),
   Application = require('./api/models/applicationModel'),
+  Sponsorship = require('./api/models/sponsorshipModel');
   bodyParser = require('body-parser');
 
 // MongoDB URI building
@@ -28,19 +29,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var routesActors = require('./api/routes/actorRoutes');
+var routesSponsorships = require('./api/routes/sponsorshipRoutes');
 var routesTrips = require('./api/routes/tripRoutes'); 
 var routesApplications = require('./api/routes/applicationRoutes');
 
 
+
 routesActors(app);
+routesSponsorships(app);
 routesTrips(app);
 routesApplications(app);
+
 
 
 console.log("Connecting DB to: " + mongoDBURI);
 mongoose.connection.on("open", function (err, conn) {
     app.listen(port, function () {
-        console.log('ACME-Explorer-CloudTeam RESTful API server started on: ' + port);
+        console.log('ACME-Explorer-CloudTeam RESTful API server started on: http://localhost:' + port+"/");
     });
 });
 
