@@ -30,8 +30,8 @@ var CommentSchema = new Schema({
     type: String,
     required: 'Kindly enter the title of the comment'
   },
-  author:{
-      type: String
+  author: {
+    type: String
   },
   commentText: {
     type: String,
@@ -43,13 +43,13 @@ var tripSchema = new Schema({
   ticker: {
     type: String,
     validate: {
-        validator: function(v) {
-          return /\d{6}-\w{4}/.test(v);
+      validator: function (v) {
+        return /\d{6}-\w{4}/.test(v);
       },
       message: 'ticket is not valid, Pattern()'
     },
     unique: true
-  }, 
+  },
   title: {
     type: String,
     required: 'Kindly enter the title of the trip'
@@ -59,7 +59,7 @@ var tripSchema = new Schema({
     required: 'Kindly enter the description of the trip'
   },
   cancelledReason: {
-    type: String  
+    type: String
   },
   price: {
     type: Number,
@@ -75,7 +75,7 @@ var tripSchema = new Schema({
     required: 'Kindly enter the end date of the trip'
   },
   pictures: [
-    {data: Buffer, contentType: String}
+    { data: Buffer, contentType: String }
   ],
   stages: [StageSchema],
   comments: [CommentSchema],
@@ -83,6 +83,11 @@ var tripSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Sponsorships"
   }],
+  managerID: {
+    type: Schema.Types.ObjectId,
+    ref: "Actor",
+    required: 'manager id required'
+  },
   created: {
     type: Date,
     default: Date.now
@@ -92,20 +97,19 @@ var tripSchema = new Schema({
 
 
 // Execute before each trip.save() call
-tripSchema.pre('save', function(callback) {
+tripSchema.pre('save', function (next) {
   var new_trip = this;
-  var date = new Date;
-  var day=dateFormat(new Date(), "yymmdd");
+  var day = dateFormat(new Date(), "yymmdd");
 
   var generated_ticker = [day, generate('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4)].join('-')
   new_trip.ticker = generated_ticker;
-  callback();
+  next();
 });
 
 //Execute the sum of the price before each save
-tripSchema.pre('save', function(callback){
+tripSchema.pre('save', function (next) {
   var new_trip = this;
-  
+
   //Set the price field to 0
   new_trip.price = 0;
 
@@ -113,8 +117,34 @@ tripSchema.pre('save', function(callback){
   new_trip.stages.forEach(e => {
     new_trip.price += e.price
   });
-  callback();
+  next();
 });
+
+//Check if the author is an MANAGER
+tripSchema.pre('save', function(next){
+
+  var new_trip = this;
+  var manager_id = new_trip.managerID;
+
+  if(manager_id){
+    Actor.findOne({_id:manager_id}, function(err, res){
+        if(err){
+          next(err);
+        }else{
+          if(!res){
+            next(new Error("There is not any Manager with id: "+ manager_id));
+          }else{
+            if(!(res.role === 'MANAGER')){
+              next(new Error("The Actor with id: "+ manager_id+" is not an MANAGER Actor"));
+            }else{
+              next();
+            }
+          }
+        }
+    });
+  }
+});
+
 
 module.exports = mongoose.model('Trip', tripSchema);
 module.exports = mongoose.model('Stage', StageSchema);

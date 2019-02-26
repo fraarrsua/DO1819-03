@@ -51,8 +51,7 @@ var ActorSchema = new Schema({
     type: String
   },
   address:{
-    type: String,
-    required: 'Kindly enter the address'
+    type: String
   },
   password: {
     type: String,
@@ -91,12 +90,12 @@ var ActorSchema = new Schema({
 ActorSchema.pre('save', function (callback) {
   var actor = this;
 
-  // Break out if the password hasn't changed
+  // Sale si la contraseña no ha cambiado
   if (!actor.isModified('password')){
     return callback();
   } 
 
-  // Password changed so we need to hash it
+  // Si la contraseña ha cambiado la hasheamos
   bcrypt.genSalt(5, function (err, salt) {
     if (err) return callback(err);
 
