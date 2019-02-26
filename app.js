@@ -6,6 +6,7 @@ var express = require('express'),
   Trip = require('./api/models/tripModel'),
   Application = require('./api/models/applicationModel'),
   Sponsorship = require('./api/models/sponsorshipModel');
+  //Finder = require('./api/models/finderModel');
   bodyParser = require('body-parser');
 
 // MongoDB URI building
@@ -32,13 +33,14 @@ var routesActors = require('./api/routes/actorRoutes');
 var routesSponsorships = require('./api/routes/sponsorshipRoutes');
 var routesTrips = require('./api/routes/tripRoutes'); 
 var routesApplications = require('./api/routes/applicationRoutes');
-
+var routesFinder = require('./api/routes/finderRoutes');
 
 
 routesActors(app);
 routesSponsorships(app);
 routesTrips(app);
 routesApplications(app);
+routesFinder(app);
 
 
 

@@ -483,6 +483,59 @@ paths:
         '404':
           description: Sponsorship not found
       x-swagger-router-controller: Sponsorships
+  /finder/{explorerId}:
+    get:
+      tags:
+        - Finder
+      summary: Find search criteria by User ID
+      description: Returns a search criteria by Explorer ID
+      operationId: search_explorer_criteria
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: explorerId
+          in: path
+          description: ID of explorer to return by its criteria
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Finder'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Finder not found
+      x-swagger-router-controller: Finder
+    put:
+      tags:
+        - Finder
+      summary: Update a search criteria
+      description: This can only be done by the authorized user.
+      operationId: update_finder
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: explorerId
+          in: path
+          description: explorerId that needs to be updated
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Update finder object
+          required: true
+          schema:
+            $ref: '#/definitions/Finder'
+      responses:
+        '400':
+          description: Invalid explorer ID supplied
+        '404':
+          description: Finder not found
+      x-swagger-router-controller: Finder
 definitions:
   Actor:
     type: object
@@ -677,3 +730,34 @@ definitions:
       price: 654121
       sponsordId: 4238795
       tripId: 51238
+  Finder:
+    type: object
+    required:
+      - keyword
+      - priceMin
+      - priceMax
+      - dateInit
+      - dateEnd
+      - explorerId
+    properties:
+      keyword:
+        type: string
+      priceMin:
+        type: number
+      priceMax:
+        type: number
+      dateInit:
+        type: string
+        format: datetime
+      dateEnd:
+        type: string
+        format: datetime
+      explorerId:
+        type: number
+    example:
+      keyword: paris
+      priceMin: 0
+      priceMax: 644646
+      dateInit: 2019-04-16
+      dateEnd: 2019-04-20
+      explorerId: 51
