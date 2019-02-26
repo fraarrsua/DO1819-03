@@ -1,6 +1,37 @@
 'use strict';
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;
+
+var FinderSchema = new Schema({
+  keyword:{
+      type: String,
+      required:'Keyword is required'
+  },
+  priceMin:{
+      type: Number,
+      required: 'princeMin is required',
+      min: 0
+  },
+  priceMax:{
+      type: Number,
+      required: 'priceMax is required'
+  },
+  dateInit:{
+      type: Date,
+      required: true
+  },
+  dateEnd:{
+      type: Date,
+      required: true
+  },
+  explorerId:{
+      type: Schema.Types.ObjectId,
+      ref: "Actor",
+      required: 'explorer actor id required'
+  }
+}, { strict: false });
+
 
 var ActorSchema = new Schema({
   name: {
@@ -41,11 +72,14 @@ var ActorSchema = new Schema({
     type: Boolean,
     defaul: false
   },
-  search:[{
-    type: Schema.Types.ObjectId,
-    ref: 'Searchs',
+  flatRate:{
+    type: Boolean,
+    defaul: false
+  },
+  finder:{
+    type: FinderSchema,
     default: null
-  }],
+  },
   created: {
     type: Date,
     default: Date.now
@@ -53,4 +87,36 @@ var ActorSchema = new Schema({
 }, { strict: false });
 
 
-module.exports = mongoose.model('Actors', ActorSchema);
+//Controlar si la contraseña se ha modificado y volver a hashearla
+ActorSchema.pre('save', function (callback) {
+  var actor = this;
+
+  // Break out if the password hasn't changed
+  if (!actor.isModified('password')){
+    return callback();
+  } 
+
+  // Password changed so we need to hash it
+  bcrypt.genSalt(5, function (err, salt) {
+    if (err) return callback(err);
+
+    bcrypt.hash(actor.password, salt, function (err, hash) {
+      if (err) return callback(err);
+      actor.password = hash;
+      callback();
+    });
+  });
+});
+
+//Controlar si la contraseña viene hasheada
+actorSchema.methods.verifyPassword = function (password, cb) {
+  bcrypt.compare(password, this.password, function (err, isMatch) {
+    console.log(Date()+': Verifying password in ActorModel: ' + password);
+    if (err) return cb(err);
+    console.log('isMatch: ' + isMatch);
+    cb(null, isMatch);
+  });
+};
+
+module.exports = mongoose.model('Actor', ActorSchema);
+module.exports = mongoose.model('Finder', FinderSchema);

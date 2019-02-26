@@ -1,6 +1,8 @@
 'use strict';
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var Schema = mongoose.Schema
+    Actor = mongoose.model('Actor'),
+    Trip = mongoose.model('Trip');
 
 //SponsorshipSchema
 var SponsorshipSchema = new Schema({
@@ -11,7 +13,8 @@ var SponsorshipSchema = new Schema({
     },
     tripId:{
       type: Schema.Types.ObjectId,
-      ref: "Trips"
+      ref: "Trip",
+      required: 'trip id required'
     },
     banner:{
       data: Buffer, 

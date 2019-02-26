@@ -81,8 +81,7 @@ var tripSchema = new Schema({
   comments: [CommentSchema],
   sponsors: [{
     type: Schema.Types.ObjectId,
-    ref: "Sponsorships",
-    required: 'sponsorship id required'
+    ref: "Sponsorships"
   }],
   created: {
     type: Date,
@@ -98,8 +97,17 @@ tripSchema.pre('save', function(callback) {
   var date = new Date;
   var day=dateFormat(new Date(), "yymmdd");
 
-  var generated_ticker = [day, generate('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 6)].join('-')
+  var generated_ticker = [day, generate('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4)].join('-')
   new_trip.ticker = generated_ticker;
+  callback();
+});
+
+//Execute the sum of the price before each save
+tripSchema.pre('save', function(callback){
+  var new_trip = this;
+  
+  //Set the price field to 0
+  new_trip.price = 0;
 
   //Compute the total price
   new_trip.stages.forEach(e => {
@@ -108,6 +116,6 @@ tripSchema.pre('save', function(callback) {
   callback();
 });
 
-module.exports = mongoose.model('Trips', tripSchema);
-module.exports = mongoose.model('Stages', StageSchema);
+module.exports = mongoose.model('Trip', tripSchema);
+module.exports = mongoose.model('Stage', StageSchema);
 

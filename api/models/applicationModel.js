@@ -30,19 +30,19 @@ var applicationSchema = new mongoose.Schema({
   },
   explorer: {
     type: Schema.Types.ObjectId,
-    ref: "Actors",
+    ref: "Actor",
     required: 'explorer id required'
   },
   trip: {
     type: Schema.Types.ObjectId,
-    ref: "Trips",
+    ref: "Trip",
     required: 'trip id required'
   },
   manager: {
     type: Schema.Types.ObjectId,
-    ref: "Actors",
+    ref: "Actor",
     required: 'manager id required'
   }
 }, { strict: false });
 
-module.exports = mongoose.model('Applications', applicationSchema);
+module.exports = mongoose.model('Application', applicationSchema);
