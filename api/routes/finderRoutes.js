@@ -1,6 +1,9 @@
 'use strict';
 module.exports = function(app) {
-  var finder = require('../controllers/finderController');
+  var finderController = require('../controllers/finderController');
+
+app.route('v1/finder/')
+  .post(finderController.post_a_finder);
 
   /**
    * 
@@ -13,7 +16,7 @@ module.exports = function(app) {
    * @url /v1/finder/:explorerId
    * @param {string} sponsorshipId
   */
- app.route('/v1/finder/:explorerId')
- .get(finder.read_a_finder)
- .put(finder.update_a_finder)
+ app.route('/v1/finder/:explorerID')
+ .get(finderController.read_a_finder)
+ .put(finderController.update_a_finder);
 };

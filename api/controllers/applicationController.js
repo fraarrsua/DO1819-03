@@ -2,110 +2,83 @@
 
 
 var mongoose = require('mongoose'),
-Application = mongoose.model('Applications');
+  Application = mongoose.model('Application');
 
-exports.list_all_applications = function(req, res) {
+exports.list_all_applications = function (req, res) {
 
-  Application.find({}, function(err, order) {
-    if (err){
+  Application.find({}, function (err, applications) {
+    if (err) {
       console.log(Date() + ": " + err);
       res.send(err);
     }
-    else{
-      res.json(order);
-    }
-  });
-};
-
-exports.list_my_applications = function(req, res) {
-  Application.find(function(err, applications) {
-    if (err){
-      console.log(Date() + ": " + err);
-      res.send(err);
-    }
-    else{
+    else {
+      console.log(Date() + ": Sending all trips.");
       res.status(200).json(applications);
     }
   });
 };
 
-exports.search_user_applications = function(req, res) {
-  
-  var userId = req.params.userId;
-  
+exports.search_user_applications = function (req, res) {
+
+  var userId = req.params.userID;
+
   //Search depending on params
-  console.log('Searching orders depending on params');
-  res.send('Applications returned from the orders search');
+  console.log('Searching applications depending on params');
+  res.send('Applications returned from the trips search');
 };
 
 
-exports.create_an_application = function(req, res) {
+exports.create_an_application = function (req, res) {
 
   //Check if the actor is EXPLORER
   var new_application = new Application(req.body);
 
-  new_application.save(function(error, application) {
-    if (error){
+  new_application.save(function (err, application) {
+    if (err) {
       console.log(Date() + ": " + err);
       res.send(err);
     }
-    else{
-      console.log(Date() + ": " + "New application created.");
+    else {
+      console.log(Date() + ": " + "Application created.");
       res.status(201).send(application);
     }
   });
 };
 
 
-exports.read_an_application = function(req, res) {
+exports.read_an_application = function (req, res) {
 
-  Application.findById(req.params.applicationId, function(err, application) {
-    if (err){
+  Application.findOne({ _id: req.params.applicationId }, function (err, application) {
+    if (err) {
       console.log(Date() + ": " + err);
       res.send(err);
     }
-    else{
-      console.log(Date() + ": " + "Sponsorship returned.");
+    else {
+      console.log(Date() + ": " + "Sending Application.");
       res.status(200).send(application);
     }
   });
 };
 
+exports.change_status = function(req,res){
 
-exports.update_an_application = function(req, res) {
+    //This method is to change the status and control this:
+    //PENDING only to REJECTED or DUE
+    //DUE only to ACCEPTED
+    //ACCEPTED only to CANCELLED
+}
+
+
+exports.update_an_application = function (req, res) {
   //Check the conditions of the applications and who is the role
-  Application.findById(req.params.applicationId, function(err, order) {
-      if (err){
+    Application.findOneAndUpdate({ _id: req.params.applicationId }, req.body, { new: true }, function (err, application) {
+      if (err) {
         console.log(Date() + ": " + err);
         res.send(err);
       }
-      else{
-          Application.findOneAndUpdate({_id: req.params.applicationId}, req.body, {new: true}, function(err, application) {
-            if (err){
-              console.log(Date() + ": " + err);
-              res.send(err);
-            }
-            else{
-              console.log(Date() + ": " + "Application updated.");
-            res.status(200).send(application);
-            }
-          });
-        }
+      else {
+        console.log(Date() + ": " + "Application updated.");
+        res.status(200).send(application);
+      }
     });
 };
-
-
-/*exports.delete_an_application = function(req, res) {
-  //Check if the order were delivered or not and delete it or not accordingly
-  //Check if the user is the proper customer that posted the order and if not: res.status(403); "an access token is valid, but requires more privileges"
-  Application.deleteOne({
-    _id: req.params.orderId
-  }, function(err, order) {
-    if (err){
-      res.send(err);
-    }
-    else{
-      res.json({ message: 'Application successfully deleted' });
-    }
-  });
-};*/

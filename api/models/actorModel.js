@@ -45,7 +45,8 @@ var ActorSchema = new Schema({
   email: {
     type: String,
     unique: true,
-    required: 'Kindly enter the actor email'
+    required: 'Kindly enter the actor email',
+    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
   },
   phone: {
     type: String
@@ -69,11 +70,11 @@ var ActorSchema = new Schema({
   },
   banned:{
     type: Boolean,
-    defaul: false
+    default: false
   },
-  flatRate:{
+  flatRatePaid:{
     type: Boolean,
-    defaul: false
+    default: false
   },
   finder:{
     type: FinderSchema,
@@ -108,7 +109,7 @@ ActorSchema.pre('save', function (callback) {
 });
 
 //Controlar si la contraseña viene hasheada
-actorSchema.methods.verifyPassword = function (password, cb) {
+ActorSchema.methods.verifyPassword = function (password, cb) {
   bcrypt.compare(password, this.password, function (err, isMatch) {
     console.log(Date()+': Verifying password in ActorModel: ' + password);
     if (err) return cb(err);

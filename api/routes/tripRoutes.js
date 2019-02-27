@@ -47,7 +47,7 @@ module.exports = function (app) {
    * @type get put delete 
    * @url /v1/trips/:tripId
   */
-  app.route('/v1/trips/:tripId')
+  app.route('/v1/trips/:tripID')
     .get(trips.read_a_trip)
     .put(trips.update_a_trip)
     .delete(trips.delete_a_trip);

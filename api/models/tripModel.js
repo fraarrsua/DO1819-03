@@ -1,8 +1,8 @@
 'use strict';
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var nanoid = require('nanoid');
-const generate = nanoid.generate;
+var Schema = mongoose.Schema,
+  Actor = mongoose.model('Actor');
+const generate = require('nanoid/generate');
 const dateFormat = require('dateformat');
 
 var StageSchema = new Schema({
@@ -59,11 +59,11 @@ var tripSchema = new Schema({
     required: 'Kindly enter the description of the trip'
   },
   cancelledReason: {
-    type: String
+    type: String,
+    default: null
   },
   price: {
     type: Number,
-    required: 'Kindly enter the price of the trip',
     min: 0
   },
   dateInit: {
@@ -72,14 +72,23 @@ var tripSchema = new Schema({
   },
   dateEnd: {
     type: Date,
+    validate: {
+      validator: function (value) {
+        return this.dateInit < value;
+      },
+      message: 'End date must be after start date'
+    },
     required: 'Kindly enter the end date of the trip'
   },
   pictures: [
-    { data: Buffer, contentType: String }
+    {
+      data: Buffer,
+      contentType: String
+    }
   ],
   stages: [StageSchema],
   comments: [CommentSchema],
-  sponsors: [{
+  sponsorships: [{
     type: Schema.Types.ObjectId,
     ref: "Sponsorships"
   }],
@@ -120,27 +129,34 @@ tripSchema.pre('save', function (next) {
   next();
 });
 
+tripSchema.pre('findOneAndUpdate', function (next) {
+  var stages_price = this._update.stages.map((stage) => stage.price);
+  var totalPrice = stages_price.reduce((a, b) => a + b, 0);
+  this.update({}, { $set: { price: totalPrice } });
+  next();
+});
+
 //Check if the author is an MANAGER
-tripSchema.pre('save', function(next){
+tripSchema.pre('save', function (next) {
 
   var new_trip = this;
   var manager_id = new_trip.managerID;
 
-  if(manager_id){
-    Actor.findOne({_id:manager_id}, function(err, res){
-        if(err){
-          next(err);
-        }else{
-          if(!res){
-            next(new Error("There is not any Manager with id: "+ manager_id));
-          }else{
-            if(!(res.role === 'MANAGER')){
-              next(new Error("The Actor with id: "+ manager_id+" is not an MANAGER Actor"));
-            }else{
-              next();
-            }
+  if (manager_id) {
+    Actor.findOne({ _id: manager_id }, function (err, res) {
+      if (err) {
+        next(err);
+      } else {
+        if (!res) {
+          next(new Error("There is not any Manager with id: " + manager_id));
+        } else {
+          if (!(res.role === 'MANAGER')) {
+            next(new Error("The Actor with id: " + manager_id + " is not an MANAGER Actor"));
+          } else {
+            next();
           }
         }
+      }
     });
   }
 });

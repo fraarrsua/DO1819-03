@@ -11,28 +11,36 @@ var applicationSchema = new mongoose.Schema({
     default: 'PENDING',
     enum: ['PENDING', 'REJECTED', 'DUE', 'ACCEPTED', 'CANCELLED']
   },
-  consumerName:{
-    type: String,
-    required: 'Consumer name required'
-  },
   dateApplication: {
     type: Date,
     default: Date.now
   },
-  datePayment: {
-    type: Date
+  paid: {
+    type: Boolean,
+    default: false
   },
-  cancelationMoment: {
-    type: Date
+  datePayment: {
+    type: Date,
+    validate: {
+      validator: function (value) {
+        return this.dateApplication < value;
+      },
+      message: 'datePayment must be after ApplicationDate'
+    }
+  },
+  dateCancelation: {
+    type: Date,
+    validate: {
+      validator: function (value) {
+        return this.dateApplication < value;
+      },
+      message: 'cancelationDate must be after ApplicationDate'
+    }
   },
   rejectionComment: {
     type: String
   },
   comments: [String],
-  total:{
-    type: Number,
-    min: 0
-  },
   explorerID: {
     type: Schema.Types.ObjectId,
     ref: "Actor",
@@ -42,11 +50,6 @@ var applicationSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "Trip",
     required: 'trip id required'
-  },
-  managerID: {
-    type: Schema.Types.ObjectId,
-    ref: "Actor",
-    required: 'manager id required'
   }
 }, { strict: false });
 

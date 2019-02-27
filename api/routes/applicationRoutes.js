@@ -30,8 +30,8 @@ module.exports = function(app) {
    * @url /v1/applications/:userId
    * @param {string} userId
   */
- app.route('/v1/applications/:userId')
- .get(application.search_user_applications);
+ app.route('/v1/applications/:applicationID/changeStatus')
+ .put(application.change_status);
 
 
  /**
@@ -47,49 +47,4 @@ module.exports = function(app) {
  .get(application.read_an_application)
  .put(application.update_an_application);
 
-/*
-  /**
-   * Search engine for applications
-   * Get applications depending on params
-   *    RequiredRoles: Clerk
-   *
-   * @section applications
-   * @type get
-   * @url /v1/applications/search
-   * @param {string} clerkId
-   * @param {string} asigned (true|false)
-   * @param {string} delivered (true|false)
-  */
-  /*app.route('/v1/applications/search')
-    .get(application.search_applications);
-
-
-  /**
-   * Delete an application if it is not delivered
-   *    RequiredRoles: to be the customer that posted the application
-   * Put an application with the proper clerk assignment (only if the application has not previously assigned); 
-   * also to update the delivery moment.
-   *    RequiredRoles: clerk
-   * Get an specific application.
-   *    RequiredRoles: to be a proper customer
-   * 
-   * @section applications
-   * @type put delete
-   * @url /v1/applications/:applicationId
-  */
-  /*app.route('/v1/applications/:applicationId')
-    .get(application.read_an_application) 
-    .put(application.update_an_application) 
-    .delete(application.delete_an_application);
-
-  /**
-   * Get my applications.
-   *    RequiredRoles: to be a proper customer
-   * 
-   * @section myapplications
-   * @type get
-   * @url /v1/myapplications/:actorId
-  */
-  /*app.route('/v1/myapplications')
-    .get(application.list_my_applications); //añadir ownership para el CONSUMER*/
 };

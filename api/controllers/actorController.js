@@ -1,7 +1,7 @@
 'use strict';
 /*---------------ACTOR----------------------*/
 var mongoose = require('mongoose'),
-  Actor = mongoose.model('Actors');
+  Actor = mongoose.model('Actor');
 
 exports.create_an_actor = function (req, res) {
 
