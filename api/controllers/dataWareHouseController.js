@@ -69,8 +69,8 @@ function createDataWareHouseJob(){
           new_dataWareHouse.topCancellers = results[0];
           new_dataWareHouse.topNotCancellers = results[1];
           new_dataWareHouse.bottomNotCancellers = results[2];
-          new_dataWareHouse.topexplorers = results[3];
-          new_dataWareHouse.bottomexplorers = results[4];
+          new_dataWareHouse.topExplorers = results[3];
+          new_dataWareHouse.bottomExplorers = results[4];
           new_dataWareHouse.ratioCancelledOrders = results[5];
           new_dataWareHouse.rebuildPeriod = rebuildPeriod;
     
