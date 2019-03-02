@@ -118,5 +118,8 @@ ActorSchema.methods.verifyPassword = function (password, cb) {
   });
 };
 
+ActorSchema.index({ name: 'text', surname: 'text', role: 'text'});
+FinderSchema.index({ keyword: 'text'});
+
 module.exports = mongoose.model('Actor', ActorSchema);
 module.exports = mongoose.model('Finder', FinderSchema);

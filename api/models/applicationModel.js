@@ -100,5 +100,6 @@ applicationSchema.pre('save', function(next){
   }
 });
 
+applicationSchema.index({status: 'text'});
 
 module.exports = mongoose.model('Application', applicationSchema);
