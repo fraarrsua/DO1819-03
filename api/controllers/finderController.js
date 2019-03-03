@@ -4,39 +4,68 @@
 var mongoose = require('mongoose'),
   Finder = mongoose.model('Finder');
 
-exports.post_a_finder = function(req, res){
-    var new_finder = new Finder(req.body);
+exports.post_a_finder = function (req, res) {
 
-    Finder.save(new_finder, function(err, res){
-        if(err){
-            console.log(Date().now()+ ":"+err);
-            res.send(err);
-        }else{
-            res.status(201).json(res);
-        }
-    });
+  console.log(Date() + ": " + "POST /v1/finders");
+
+  var new_finder = new Finder(req.body);
+
+  new_finder.save(function (err, finder) {
+    if (err) {
+      console.log(Date() + ":" + err);
+      res.send(err);
+    } else {
+      res.status(201).json(finder);
+    }
+  });
 }
 
 
-exports.read_a_finder = function(req, res) {
-    Trip.findById(req.params.explorerID, function(err, finder) {
-      if (err){
-        res.send(err);
-      }
-      else{
-        res.json(finder);
-      }
-    });
+exports.list_all_finders = function (req, res) {
+  console.log(Date() + ": " + "GEST /v1/finders");
+
+  Finder.find({}, function (err, finders) {
+    if (err) {
+      console.log(Date() + ": " + err);
+      res.send(err);
+    }
+    else {
+      console.log(Date() + ": Sending all finders.");
+      res.status(200).json(finders);
+    }
+  });
+}
+
+
+exports.read_a_finder = function (req, res) {
+  console.log(Date() + ": " + "GET /v1/finders/:finderId");
+  Finder.findById(req.params.finderID, function (err, finder) {
+    if (err) {
+      console.log(Date() + ": " + err);
+      res.send(err);
+    }
+    else {
+      console.log(Date() + ": " + " Sending finder.");
+      res.status(200).json(finder);
+    }
+  });
 };
 
-exports.update_a_finder = function(req, res) {
-    //Check that the user is administrator if it is updating more things than comments and if not: res.status(403); "an access token is valid, but requires more privileges"
-      Finder.findOneAndUpdate({_id: req.params.explorerID}, req.body, {new: true}, function(err, finder) {
-        if (err){
-          res.send(err);
-        }
-        else{
-          res.json(finder);
-        }
-      });
-  };
+exports.update_a_finder = function (req, res) {
+  //Check that the user is administrator if it is updating more things than comments and if not: res.status(403); "an access token is valid, but requires more privileges"
+  console.log(Date() + ": " + "PUT /v1/finders/:finderID");
+
+  Finder.findOneAndUpdate({ _id: req.params.finderID }, req.body, { new: true }, function (err, finderUpdated) {
+    if (err) {
+      console.log(Date() + ": " + err);
+      res.send(err);
+    }
+    else {
+      console.log(Date() + ": " + " Finder updated.");
+      res.status(200).json(finderUpdated);
+    }
+  });
+};
+
+
+

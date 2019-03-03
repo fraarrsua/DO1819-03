@@ -1,13 +1,14 @@
 var express = require('express'),
-  app = express(),
-  port = process.env.PORT || 8080,
-  mongoose = require('mongoose'),
-  Actor = require('./api/models/actorModel'),
-  Trip = require('./api/models/tripModel'),
-  Application = require('./api/models/applicationModel'),
-  Sponsorship = require('./api/models/sponsorshipModel');
-  //Finder = require('./api/models/finderModel');
-  bodyParser = require('body-parser');
+    app = express(),
+    port = process.env.PORT || 8080,
+    mongoose = require('mongoose'),
+    //Models
+    Actor = require('./api/models/actorModel'),
+    Finder = require('./api/models/finderModel'),
+    Trip = require('./api/models/tripModel'),
+    Application = require('./api/models/applicationModel'),
+    Sponsorship = require('./api/models/sponsorshipModel'),
+    bodyParser = require('body-parser');
 
 // MongoDB URI building
 var mongoDBHostname = process.env.mongoDBHostname || "localhost";
@@ -33,23 +34,24 @@ app.use(bodyParser.json());
 
 var routesActors = require('./api/routes/actorRoutes');
 var routesSponsorships = require('./api/routes/sponsorshipRoutes');
-var routesTrips = require('./api/routes/tripRoutes'); 
+var routesTrips = require('./api/routes/tripRoutes');
 var routesApplications = require('./api/routes/applicationRoutes');
-var routesFinder = require('./api/routes/finderRoutes');
+var routesFinders = require('./api/routes/finderRoutes');
 
 
+routesFinders(app);
 routesActors(app);
 routesSponsorships(app);
 routesTrips(app);
 routesApplications(app);
-routesFinder(app);
+
 
 
 
 console.log("Connecting DB to: " + mongoDBURI);
 mongoose.connection.on("open", function (err, conn) {
     app.listen(port, function () {
-        console.log('ACME-Explorer-CloudTeam RESTful API server started on: http://localhost:' + port+"/");
+        console.log('ACME-Explorer-CloudTeam RESTful API server started on: http://localhost:' + port + "/");
     });
 });
 

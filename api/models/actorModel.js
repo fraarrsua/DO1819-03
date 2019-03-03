@@ -3,36 +3,6 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;
 
-var FinderSchema = new Schema({
-  keyword:{
-      type: String,
-      required:'Keyword is required'
-  },
-  priceMin:{
-      type: Number,
-      required: 'princeMin is required',
-      min: 0
-  },
-  priceMax:{
-      type: Number,
-      required: 'priceMax is required'
-  },
-  dateInit:{
-      type: Date,
-      required: true
-  },
-  dateEnd:{
-      type: Date,
-      required: true
-  },
-  explorerId:{
-      type: Schema.Types.ObjectId,
-      ref: "Actor",
-      required: 'explorer actor id required'
-  }
-}, { strict: false });
-
-
 var ActorSchema = new Schema({
   name: {
     type: String,
@@ -77,8 +47,8 @@ var ActorSchema = new Schema({
     default: false
   },
   finder:{
-    type: FinderSchema,
-    default: null
+    type: Schema.Types.ObjectId,
+    ref: "Finder"
   },
   created: {
     type: Date,
@@ -119,4 +89,3 @@ ActorSchema.methods.verifyPassword = function (password, cb) {
 };
 
 module.exports = mongoose.model('Actor', ActorSchema);
-module.exports = mongoose.model('Finder', FinderSchema);
