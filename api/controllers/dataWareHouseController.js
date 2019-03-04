@@ -15,7 +15,7 @@ exports.list_all_indicators = function (req, res) {
             res.send(err);
         }
         else {
-            res.stauts(200).json(indicators);
+            res.json(indicators);
         }
     });
 };
@@ -75,9 +75,9 @@ function createDataWareHouseJob() {
             computeTripsManagerStats,
             computeApplicationsTripStats,
             computePriceTripStats,
-            computeApplicationsRatioPerStatus,
-            computeAveragePriceFinderStats,
-            computeTopKeywordsFinderStats
+            computeApplicationsRatioPerStatus
+            //computeAveragePriceFinderStats,
+            //computeTopKeywordsFinderStats
         ], function (err, results) { //Función que recoje los resultados de las computaciones anteriores
             if (err) {
                 console.log("Error computing datawarehouse: " + err);
@@ -113,6 +113,7 @@ module.exports.createDataWareHouseJob = createDataWareHouseJob;
 
 //La media, minimo, máximo y desviación estándar del número de viajes controlados por manager.
 function computeTripsManagerStats(callback) {
+    console.log("Ejecuta computeTripsManagerStats");
     Trips.aggregate([
         {
             $group: {
@@ -131,6 +132,7 @@ function computeTripsManagerStats(callback) {
         },
         { $project: { _id: 0 } }
     ], function (err, res) {
+        console.log(res[0]);
         callback(err, res[0]);
     });
 
@@ -139,6 +141,8 @@ function computeTripsManagerStats(callback) {
 //La media, mínimo, máximo y desviación estándar del número de aplicaciones por viaje.
 
 function computeApplicationsTripStats(callback) {
+    console.log("Ejecuta computeApplicationsTripStats");
+
     Applications.aggregate([
         { $group: { _id: "$tripID", applicationTrips: { $sum: 1 } } },
         {
@@ -151,6 +155,7 @@ function computeApplicationsTripStats(callback) {
             }
         }
     ], function (err, res) {
+        console.log(res[0]);
         callback(err, res[0]);
     });
 
@@ -159,6 +164,8 @@ function computeApplicationsTripStats(callback) {
 //La media, mínimo, máximo y desviación estándar del precio de los viajes.
 
 function computePriceTripStats(callback) {
+    console.log("Ejecuta computePriceTripStats");
+
     Trips.aggregate([
         {
             $group: {
@@ -176,6 +183,7 @@ function computePriceTripStats(callback) {
             }
         }
     ], function (err, res) {
+        console.log(res[0]);
         callback(err, res[0])
     });
 };
@@ -183,6 +191,8 @@ function computePriceTripStats(callback) {
 //El ratio de aplicaciones agrupadas por estado (DUE, PENDING, ACCEPTED...).
 
 function computeApplicationsRatioPerStatus(callback) {
+    console.log("Ejecuta computeApplicationsRatioPerStatus");
+    
     Applications.aggregate([
         {
             $facet: {
@@ -195,6 +205,7 @@ function computeApplicationsRatioPerStatus(callback) {
         { $unwind: "$groupsTotal" },
         { $project: { _id: 0, status: "$groupsTotal._id", ratio: { $divide: ["$groupsTotal.total", "$totalApplications"] } } }
     ], function (err, res) {
+        console.log(res[0]);
         callback(err, res[0])
     });
 };

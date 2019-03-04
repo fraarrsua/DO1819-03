@@ -1,0 +1,742 @@
+{
+	"info": {
+		"_postman_id": "fd529169-45e4-41c5-b759-65748883ea70",
+		"name": "ASAS-1819-CloudTeam",
+		"description": "Test collection for ASAS project. By: CloudTeam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ACTOR Methods",
+			"item": [
+				{
+					"name": "POST ACTOR-EXPLORER",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Explorer-Name-01\",\n\t\"surname\": \"Explorer-Surname-01\",\n\t\"email\": \"Explorer-01@fakemail.com\",\n\t\"phone\": \"+34612345678\",\n\t\"address\": \"myAddress\",\n\t\"password\": \"mypass\",\n\t\"role\": \"EXPLORER\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/v1/actors",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST ACTOR-ADMINISTRATOR",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Administrator-Name-01\",\n\t\"surname\": \"Administrator-Surname-01\",\n\t\"email\": \"Administrator-01@fakemail.com\",\n\t\"phone\": \"+34612345678\",\n\t\"address\": \"myAddress\",\n\t\"password\": \"mypass\",\n\t\"role\": \"ADMINISTRATOR\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/v1/actors",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST ACTOR-MANAGER",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Manager-Name-01\",\n\t\"surname\": \"Manager-Surname-01\",\n\t\"email\": \"Manager-01@fakemail.com\",\n\t\"phone\": \"+34612345678\",\n\t\"address\": \"myAddress\",\n\t\"password\": \"mypass\",\n\t\"role\": \"MANAGER\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/v1/actors",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST ACTOR-SPONSOR",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Sponsor-Name-01\",\n\t\"surname\": \"Sponsor-Surname-01\",\n\t\"email\": \"Sponsor-01@fakemail.com\",\n\t\"phone\": \"+34612345678\",\n\t\"address\": \"myAddress\",\n\t\"password\": \"mypass\",\n\t\"role\": \"SPONSOR\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/v1/actors",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ACTOR-EXPLORER",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/v1/actors/5c75c1704897633db069e9ac",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"actors",
+								"5c75c1704897633db069e9ac"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT BAN-ACTOR-EXPLORER",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/v1/actors/5c75c1704897633db069e9ac/ban",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"actors",
+								"5c75c1704897633db069e9ac",
+								"ban"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT UPDATE-ACTOR-EXPLORER",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Explorer-Name-01\",\n\t\"surname\": \"Explorer-Surname-01\",\n\t\"email\": \"Explorer-01@fakemail.com\",\n\t\"phone\": \"+34612345678\",\n\t\"address\": \"myAddress\",\n\t\"password\": \"mypass\",\n\t\"role\": \"EXPLORER\",\n\t\"preferredLanguage\": \"es\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/v1/actors/5c75c1704897633db069e9ac",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"actors",
+								"5c75c1704897633db069e9ac"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SPONSORSHIPS Methods",
+			"item": [
+				{
+					"name": "POST SPONSORSHIP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sponsorId\": \"5c69f62ad9d04b6d7485e2ea\",\n\t\"tripId\": null,\n\t\"banner\":null,\n\t\"link\": \"www.examplelink.com\",\n\t\"paid\": false,\n\t\"price\": 0\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/v1/sponsorships",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"sponsorships"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TRIPS Methods",
+			"item": [
+				{
+					"name": "POST TRIP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Viaje a París\",\n\t\"description\":\"Viaje a la ciudad del amor donde podrás disfutar de otras paradas previas.\",\n\t\"dateInit\": \"2019-05-04T14:48:00.000\",\n\t\"dateEnd\": \"2019-05-10T14:48:00.000\",\n\t\"stages\": [\n\t\t{\n\t\t\t\"title\":\"Sevilla\",\n\t\t\t\"description\":\"Salida desde Sevilla\",\n\t\t\t\"price\": 0,\n\t\t\t\"dateInit\": \"2019-05-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Madrid\",\n\t\t\t\"description\":\"Parada en Madrid\",\n\t\t\t\"price\": 20,\n\t\t\t\"dateInit\": \"2019-05-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Barcelona\",\n\t\t\t\"description\":\"Parada en Barcelona\",\n\t\t\t\"price\": 60,\n\t\t\t\"dateInit\": \"2019-05-05T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Burdeos\",\n\t\t\t\"description\":\"Parada en Burdeos\",\n\t\t\t\"price\": 120,\n\t\t\t\"dateInit\": \"2019-05-06T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"París\",\n\t\t\t\"description\":\"Parada en París\",\n\t\t\t\"price\": 340,\n\t\t\t\"dateInit\": \"2019-05-07T14:48:00.000\"\n\t\t}],\n\t\"comments\":[\n\t\t{\n\t\t\t\"title\": \"Me encantó\",\n\t\t\t\"author\": \"randomX\",\n\t\t\t\"commentText\":\"Estuve en este viaje el año pasado con mi pareja y nos gustó mucho.\"\n\t\t},\n\t\t{\n\t\t\t\"title\": \"Decepcionante\",\n\t\t\t\"author\": \"randomX1\",\n\t\t\t\"commentText\":\"Esta agencia no sabe organizar viajes.\"\n\t\t}],\n\t\"managerID\": \"5c75c1bc4897633db069e9b1\"\n\t\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/v1/trips",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET TRIPS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/v1/trips",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET TRIP By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/v1/trips/5c75cb54e8c2f617f0ff9d54",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trips",
+								"5c75cb54e8c2f617f0ff9d54"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT TRIP By ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Viaje a Bruselas\",\n\t\"description\":\"Viaje a la cápital de Europa.\",\n\t\"dateInit\": \"2019-06-04T14:48:00.000\",\n\t\"dateEnd\": \"2019-06-10T14:48:00.000\",\n\t\"stages\": [\n\t\t{\n\t\t\t\"title\":\"Sevilla\",\n\t\t\t\"description\":\"Salida desde Sevilla\",\n\t\t\t\"price\": 0,\n\t\t\t\"dateInit\": \"2019-06-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Madrid\",\n\t\t\t\"description\":\"Parada en Madrid\",\n\t\t\t\"price\": 20,\n\t\t\t\"dateInit\": \"2019-06-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Bruselas\",\n\t\t\t\"description\":\"Parada en Bruselas\",\n\t\t\t\"price\": 120,\n\t\t\t\"dateInit\": \"2019-06-05T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Gante\",\n\t\t\t\"description\":\"Parada en Gante\",\n\t\t\t\"price\": 1400,\n\t\t\t\"dateInit\": \"2019-06-06T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Brujas\",\n\t\t\t\"description\":\"Parada en Brujas\",\n\t\t\t\"price\": 90,\n\t\t\t\"dateInit\": \"2019-06-07T14:48:00.000\"\n\t\t}],\n\t\"comments\":[\n\t\t{\n\t\t\t\"title\": \"Me encantó\",\n\t\t\t\"author\": \"randomX\",\n\t\t\t\"commentText\":\"Estuve en este viaje el año pasado con mi pareja y nos gustó mucho.\"\n\t\t},\n\t\t{\n\t\t\t\"title\": \"Decepcionante\",\n\t\t\t\"author\": \"randomX1\",\n\t\t\t\"commentText\":\"Esta agencia no sabe organizar viajes.\"\n\t\t}],\n\t\"managerID\": \"5c75c1c54897633db069e9b2\"\n\t\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/v1/trips/5c75cb54e8c2f617f0ff9d54",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trips",
+								"5c75cb54e8c2f617f0ff9d54"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE TRIP By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Viaje a Bruselas\",\n\t\"description\":\"Viaje a la cápital de Europa.\",\n\t\"dateInit\": \"2019-06-04T14:48:00.000\",\n\t\"dateEnd\": \"2019-06-10T14:48:00.000\",\n\t\"stages\": [\n\t\t{\n\t\t\t\"title\":\"Sevilla\",\n\t\t\t\"description\":\"Salida desde Sevilla\",\n\t\t\t\"price\": 0,\n\t\t\t\"dateInit\": \"2019-06-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Madrid\",\n\t\t\t\"description\":\"Parada en Madrid\",\n\t\t\t\"price\": 20,\n\t\t\t\"dateInit\": \"2019-06-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Bruselas\",\n\t\t\t\"description\":\"Parada en Bruselas\",\n\t\t\t\"price\": 120,\n\t\t\t\"dateInit\": \"2019-06-05T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Gante\",\n\t\t\t\"description\":\"Parada en Gante\",\n\t\t\t\"price\": 1400,\n\t\t\t\"dateInit\": \"2019-06-06T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Brujas\",\n\t\t\t\"description\":\"Parada en Brujas\",\n\t\t\t\"price\": 90,\n\t\t\t\"dateInit\": \"2019-06-07T14:48:00.000\"\n\t\t}],\n\t\"comments\":[\n\t\t{\n\t\t\t\"title\": \"Me encantó\",\n\t\t\t\"author\": \"randomX\",\n\t\t\t\"commentText\":\"Estuve en este viaje el año pasado con mi pareja y nos gustó mucho.\"\n\t\t},\n\t\t{\n\t\t\t\"title\": \"Decepcionante\",\n\t\t\t\"author\": \"randomX1\",\n\t\t\t\"commentText\":\"Esta agencia no sabe organizar viajes.\"\n\t\t}],\n\t\"managerID\": \"5c75c1c54897633db069e9b2\"\n\t\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/v1/trips/5c75cf7ebf09685d840b02d1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trips",
+								"5c75cf7ebf09685d840b02d1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SPONSORSHIPS Methods",
+			"item": [
+				{
+					"name": "POST SPONSORSHIP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sponsorID\":\"5c75c2474897633db069e9b8\",\n\t\"tripID\": \"5c75cf46bf09685d840b02c9\",\n\t\"banner\": null,\n\t\"link\":\"linkfake2.com\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/v1/sponsorships",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"sponsorships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET SPONSORSHIPS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/v1/sponsorships",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"sponsorships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET SPONSORSHIPS By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/v1/sponsorships/5c75d8f44363490130db5296",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"sponsorships",
+								"5c75d8f44363490130db5296"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE SPONSORSHIP By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/v1/sponsorships/5c75d8f44363490130db5296",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"sponsorships",
+								"5c75d8f44363490130db5296"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT SPONSORSHIPS By ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sponsorID\":\"5c75c2474897633db069e9b8\",\n\t\"tripID\": \"5c75cf46bf09685d840b02c9\",\n\t\"banner\": null,\n\t\"link\":\"linkfakeUpdated.com\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/v1/sponsorships/5c75d8f44363490130db5296",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"sponsorships",
+								"5c75d8f44363490130db5296"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "APPLICATIONS Methods",
+			"item": [
+				{
+					"name": "POST APPLICATION",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"comments\":[\"Quiero ir en clase business.\",\"¿Me podéis confirmar?\"],\n\t\"explorerID\": \"5c75c18b4897633db069e9af\",\n\t\"tripID\": \"5c75cf46bf09685d840b02c9\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/v1/applications",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"applications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET APPLICATION",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/v1/applications",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"applications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET APPLICATION By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/v1/applications/5c75d6459963b843bce23e6b",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"applications",
+								"5c75d6459963b843bce23e6b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT APPLICATION By ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"comments\":[\"Quiero ir en clase business.\",\"¿Me podéis confirmar?\",\"Esto es una actualización\"],\n\t\"explorerID\": \"5c75c18b4897633db069e9af\",\n\t\"tripID\": \"5c75cf46bf09685d840b02c9\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/v1/applications/5c75d6459963b843bce23e6b",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"applications",
+								"5c75d6459963b843bce23e6b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FINDERS Methods",
+			"item": [
+				{
+					"name": "POST Finders",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"keyword\":\"Málaga\",\n\t\"priceMin\": 100,\n\t\"priceMax\": 400,\n\t\"dateInit\": \"2019-05-20T14:48:00.000\",\n\t\"dateEnd\": \"2019-05-25T14:48:00.000\",\n\t\"explorerID\": \"5c75c18b4897633db069e9af\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/v1/finders",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"finders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DATAWAREHOUSE Methods",
+			"item": [
+				{
+					"name": "GET List all Indicators",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/v1/dataWareHouse",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"dataWareHouse"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
