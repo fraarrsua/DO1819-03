@@ -162,6 +162,12 @@ tripSchema.pre('save', function (next) {
 });
 
 
+ //INDICES
+ //Búsqueda por precio de forma ascendente
+ tripSchema.index({price:1});
+ //Índice para la búsqueda de trips por keyword
+ tripSchema.index({title:'text', description: 'text', ticker: 'text'});
+
 module.exports = mongoose.model('Trip', tripSchema);
 module.exports = mongoose.model('Stage', StageSchema);
 
