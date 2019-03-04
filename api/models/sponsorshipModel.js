@@ -79,4 +79,8 @@ SponsorshipSchema.pre('save', function(next){
   }
 });
 
+//INDICES
+//Devuelve los sposorships que están pagados, ordenados
+SponsorshipSchema.index({sponsorID: 1, paid: 1});
+
 module.exports = mongoose.model('Sponsorships', SponsorshipSchema);

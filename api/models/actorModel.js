@@ -3,36 +3,6 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;
 
-var FinderSchema = new Schema({
-  keyword:{
-      type: String,
-      required:'Keyword is required'
-  },
-  priceMin:{
-      type: Number,
-      required: 'princeMin is required',
-      min: 0
-  },
-  priceMax:{
-      type: Number,
-      required: 'priceMax is required'
-  },
-  dateInit:{
-      type: Date,
-      required: true
-  },
-  dateEnd:{
-      type: Date,
-      required: true
-  },
-  explorerId:{
-      type: Schema.Types.ObjectId,
-      ref: "Actor",
-      required: 'explorer actor id required'
-  }
-}, { strict: false });
-
-
 var ActorSchema = new Schema({
   name: {
     type: String,
@@ -76,9 +46,9 @@ var ActorSchema = new Schema({
     type: Boolean,
     default: false
   },
-  finder:{
-    type: FinderSchema,
-    default: null
+  finderID:{
+    type: Schema.Types.ObjectId,
+    ref: "Finder"
   },
   created: {
     type: Date,
@@ -118,8 +88,13 @@ ActorSchema.methods.verifyPassword = function (password, cb) {
   });
 };
 
+<<<<<<< HEAD
 ActorSchema.index({ name: 'text', surname: 'text', role: 'text'});
 FinderSchema.index({ keyword: 'text'});
+=======
+
+//INDICES
+
+>>>>>>> be0037f2b1dbf966c5a65089955a20ce9c13b70e
 
 module.exports = mongoose.model('Actor', ActorSchema);
-module.exports = mongoose.model('Finder', FinderSchema);

@@ -46,5 +46,4 @@ module.exports = function(app) {
  app.route('/v1/applications/:applicationId')
  .get(application.read_an_application)
  .put(application.update_an_application);
-
 };

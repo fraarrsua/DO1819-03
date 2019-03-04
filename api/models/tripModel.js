@@ -166,6 +166,12 @@ tripSchema.index({title: 'text', description: 'text', ticker: 'text'});
 StageSchema.index({price:1});
 StageSchema.index({title: 'text', description: 'text'});
 
+ //INDICES
+ //Búsqueda por precio de forma ascendente
+ tripSchema.index({price:1});
+ //Índice para la búsqueda de trips por keyword
+ tripSchema.index({title:'text', description: 'text', ticker: 'text'});
+
 module.exports = mongoose.model('Trip', tripSchema);
 module.exports = mongoose.model('Stage', StageSchema);
 

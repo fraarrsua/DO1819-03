@@ -53,7 +53,7 @@ paths:
         '405':
           description: Invalid input
       x-swagger-router-controller: Actor
-  /actors/{actorId}:
+  /actors/{actorID}:
     get:
       tags:
         - Actor
@@ -64,7 +64,7 @@ paths:
         - application/xml
         - application/json
       parameters:
-        - name: actorId
+        - name: actorID
           in: path
           description: ID of actor to return
           required: true
@@ -89,9 +89,9 @@ paths:
         - application/xml
         - application/json
       parameters:
-        - name: actorId
+        - name: actorID
           in: path
-          description: Actor Id that need to be updated
+          description: Actor ID that need to be updated
           required: true
           type: string
         - in: body
@@ -106,7 +106,7 @@ paths:
         '404':
           description: Actor not found
       x-swagger-router-controller: Actor
-  /actors/{actorId}/ban:
+  /actors/{actorID}/ban:
     put:
       tags:
         - Actor
@@ -117,7 +117,7 @@ paths:
         - application/xml
         - application/json
       parameters:
-        - name: actorId
+        - name: actorID
           in: path
           description: Ban an actor by ID
           required: true
@@ -172,7 +172,22 @@ paths:
         '405':
           description: Invalid input
       x-swagger-router-controller: Trips
-  /trips/{tripId}:
+  /trips/search:
+    get:
+      tags:
+        - Trip
+      summary: Search trips
+      description: ''
+      operationId: trips.search_trips
+      produces:
+        - application/xml
+        - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: Trips
+  /trips/{tripID}:
     get:
       tags:
         - Trip
@@ -183,7 +198,7 @@ paths:
         - application/xml
         - application/json
       parameters:
-        - name: tripId
+        - name: tripID
           in: path
           description: ID of trip to return
           required: true
@@ -208,9 +223,9 @@ paths:
         - application/xml
         - application/json
       parameters:
-        - name: tripId
+        - name: tripID
           in: path
-          description: Trip Id that needs to be updated
+          description: Trip ID that needs to be updated
           required: true
           type: string
         - in: body
@@ -239,9 +254,9 @@ paths:
           in: header
           required: false
           type: string
-        - name: tripId
+        - name: tripID
           in: path
-          description: Trip id to delete
+          description: Trip ID to delete
           required: true
           type: string
       responses:
@@ -288,20 +303,20 @@ paths:
         '405':
           description: Invalid input
       x-swagger-router-controller: Applications
-  /applications/{userId}:
+  /applications/applicationID/changeStatus:
     get:
       tags:
         - Application
-      summary: Find application by User ID
-      description: Returns a application by User ID
+      summary: Find application by Application ID
+      description: Returns a application by Application ID
       operationId: search_user_applications
       produces:
         - application/xml
         - application/json
       parameters:
-        - name: userId
+        - name: applicationID
           in: path
-          description: ID of user to return by its application
+          description: ID of application to return by its application
           required: true
           type: string
       responses:
@@ -314,7 +329,7 @@ paths:
         '404':
           description: Application not found
       x-swagger-router-controller: Applications
-  /applications/applicationId:
+  /applications/{applicationID}:
     get:
       tags:
         - Application
@@ -325,7 +340,7 @@ paths:
         - application/xml
         - application/json
       parameters:
-        - name: applicationId
+        - name: applicationID
           in: path
           description: ID of application to return an application
           required: true
@@ -343,16 +358,16 @@ paths:
     put:
       tags:
         - Application
-      summary: Update trip
-      description: This can only be done by the authorized user.
+      summary: Update an Application
+      description: This can only be done by the authorized actor.
       operationId: update_an_application
       produces:
         - application/xml
         - application/json
       parameters:
-        - name: applicationId
+        - name: applicationID
           in: path
-          description: Trip Id that needs to be updated
+          description: Application ID that needs to be updated
           required: true
           type: string
         - in: body
@@ -405,7 +420,7 @@ paths:
         '405':
           description: Invalid input
       x-swagger-router-controller: Trips
-  /sponsorships/{sponsorshipId}:
+  /sponsorships/{sponsorshipID}:
     get:
       tags:
         - Sponsorship
@@ -416,7 +431,7 @@ paths:
         - application/xml
         - application/json
       parameters:
-        - name: sponsorshipId
+        - name: sponsorshipID
           in: path
           description: ID of sponsorship to return
           required: true
@@ -441,9 +456,9 @@ paths:
         - application/xml
         - application/json
       parameters:
-        - name: sponsorshipId
+        - name: sponsorshipID
           in: path
-          description: sponsorshipId that needs to be updated
+          description: sponsorshipID that needs to be updated
           required: true
           type: string
         - in: body
@@ -472,9 +487,9 @@ paths:
           in: header
           required: false
           type: string
-        - name: sponsorshipId
+        - name: sponsorshipID
           in: path
-          description: Sponsorship id to delete
+          description: Sponsorship ID to delete
           required: true
           type: string
       responses:
@@ -483,18 +498,56 @@ paths:
         '404':
           description: Sponsorship not found
       x-swagger-router-controller: Sponsorships
-  /finder/{explorerId}:
+  /finders:
     get:
       tags:
         - Finder
-      summary: Find search criteria by User ID
+      summary: Return all finders
+      description: ''
+      operationId: list_all_finders
+      produces:
+        - application/xml
+        - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: Finder
+    post:
+      tags:
+        - Finder
+      summary: Add a new finder
+      description: ''
+      operationId: create_an_finder
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Finder object that needs to be added to the Acme Explorer
+          required: true
+          schema:
+            $ref: '#/definitions/Finder'
+      responses:
+        '405':
+          description: Invalid input
+      x-swagger-router-controller: Finder
+  /finders/{explorerID}:
+    get:
+      tags:
+        - Finder
+      summary: Find search criteria by Explorer ID
       description: Returns a search criteria by Explorer ID
       operationId: search_explorer_criteria
       produces:
         - application/xml
         - application/json
       parameters:
-        - name: explorerId
+        - name: explorerID
           in: path
           description: ID of explorer to return by its criteria
           required: true
@@ -519,9 +572,9 @@ paths:
         - application/xml
         - application/json
       parameters:
-        - name: explorerId
+        - name: explorerID
           in: path
-          description: explorerId that needs to be updated
+          description: explorerID that needs to be updated
           required: true
           type: string
         - in: body
@@ -536,6 +589,70 @@ paths:
         '404':
           description: Finder not found
       x-swagger-router-controller: Finder
+  /datawarehouse:
+    get:
+      tags:
+        - Datawarehouse
+      summary: Return all indicators
+      description: ''
+      operationId: list_all_indicators
+      produces:
+        - application/xml
+        - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: Datawarehouse
+    post:
+      tags:
+        - Datawarehouse
+      summary: Create a new computation period for rebuilding
+      description: ''
+      operationId: rebuildPeriod
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: New computation object that needs to be added to the Acme Explorer
+          required: true
+          schema:
+            $ref: '#/definitions/Trip'
+      responses:
+        '405':
+          description: Invalid input
+      x-swagger-router-controller: Datawarehouse
+  /datawarehouse/latest:
+    get:
+      tags:
+        - Datawarehouse
+      summary: Get list of last computed indicator
+      description: Get list of last computed indicator
+      operationId: dataWareHouse.last_indicator
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: latest
+          in: path
+          description: list of last indicator computed
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Datawarehouse'
+        '400':
+          description: Invalid indicator supplied
+        '404':
+          description: Indicator not found
+      x-swagger-router-controller: Datawarehouse
 definitions:
   Actor:
     type: object
@@ -600,10 +717,10 @@ definitions:
       - consumerName
       - dateApplication
       - datePayment
-      - explorerId
-      - managerId
+      - explorerID
+      - managerID
       - status
-      - tripId
+      - tripID
     properties:
       status:
         type: string
@@ -620,13 +737,13 @@ definitions:
         format: date
       comments:
         type: number
-      explorerId:
+      explorerID:
         type: object
         properties: {}
-      tripId:
+      tripID:
         type: object
         properties: {}
-      managerId:
+      managerID:
         type: object
         properties: {}
     example:
@@ -707,8 +824,8 @@ definitions:
       - link
       - paid
       - price
-      - sponsorId
-      - tripId
+      - sponsorID
+      - tripID
     properties:
       banner:
         type: object
@@ -719,17 +836,17 @@ definitions:
         type: boolean
       price:
         type: number
-      sponsorId:
+      sponsorID:
         type: number
-      tripId:
+      tripID:
         type: number
     example:
       banner: {}
       link: acmerexplorer.swagger.io
       paid: true
       price: 654121
-      sponsordId: 4238795
-      tripId: 51238
+      sponsordID: 4238795
+      tripID: 51238
   Finder:
     type: object
     required:
@@ -738,7 +855,7 @@ definitions:
       - priceMax
       - dateInit
       - dateEnd
-      - explorerId
+      - explorerID
     properties:
       keyword:
         type: string
@@ -752,7 +869,7 @@ definitions:
       dateEnd:
         type: string
         format: datetime
-      explorerId:
+      explorerID:
         type: number
     example:
       keyword: paris
@@ -760,4 +877,32 @@ definitions:
       priceMax: 644646
       dateInit: 2019-04-16
       dateEnd: 2019-04-20
-      explorerId: 51
+      explorerID: 52
+  Datawarehouse:
+    type: object
+    required:
+      - tripsManagerStats
+      - applicationsTripStats
+      - priceTripStats
+      - applicationsRatioPerStatus
+      - averagePriceFinderStats
+      - topKeywordsFinderStats
+    properties:
+      tripsManagerStats:
+        type: object
+        properties: {}
+      applicationsTripStats:
+        type: object
+        properties: {}
+      priceTripStats:
+        type: object
+        properties: {}
+      applicationsRatioPerStatus:
+        type: object
+        properties: {}
+      averagePriceFinderStats:
+        type: object
+        properties: {}
+      topKeywordsFinderStats:
+        type: object
+        properties: {}

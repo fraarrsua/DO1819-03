@@ -102,4 +102,10 @@ applicationSchema.pre('save', function(next){
 
 applicationSchema.index({status: 'text'});
 
+//INDICES
+//Búsqueda por estado devuelve applications ordenadas por viaje
+applicationSchema.index({tripID:1, status: 'text'});
+
+
+
 module.exports = mongoose.model('Application', applicationSchema);
