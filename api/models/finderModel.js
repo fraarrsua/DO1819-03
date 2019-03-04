@@ -57,7 +57,6 @@ FinderSchema.pre('save', function(next){
               if(!(res.role === 'EXPLORER')){
                 next(new Error("The Explorer with id: "+ explorer_id+" is not an EXPLORER Actor"));
               }else{
-                console.log("Is an Explorer");
                 next();
               }
             }
@@ -67,6 +66,7 @@ FinderSchema.pre('save', function(next){
   });
 
   //INDICES
+  //Búsqueda pasándole un keyword devuelve las búsquedas que lo contengan
   FinderSchema.index({ keyword: "text" });
 
   module.exports = mongoose.model('Finder', FinderSchema);

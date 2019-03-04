@@ -8,6 +8,8 @@ var express = require('express'),
     Trip = require('./api/models/tripModel'),
     Application = require('./api/models/applicationModel'),
     Sponsorship = require('./api/models/sponsorshipModel'),
+    DataWareHouse = require('./api/models/dataWareHouseModel'),
+    DataWareHouseTools = require('./api/controllers/dataWareHouseController'),
     bodyParser = require('body-parser');
 
 // MongoDB URI building
@@ -37,6 +39,7 @@ var routesSponsorships = require('./api/routes/sponsorshipRoutes');
 var routesTrips = require('./api/routes/tripRoutes');
 var routesApplications = require('./api/routes/applicationRoutes');
 var routesFinders = require('./api/routes/finderRoutes');
+var routesDataWareHouse = require('./api/routes/dataWareHouseRoutes');
 
 
 routesFinders(app);
@@ -44,6 +47,7 @@ routesActors(app);
 routesSponsorships(app);
 routesTrips(app);
 routesApplications(app);
+routesDataWareHouse(app);
 
 
 
@@ -58,3 +62,6 @@ mongoose.connection.on("open", function (err, conn) {
 mongoose.connection.on("error", function (err, conn) {
     console.error("DB init error " + err);
 });
+
+//Se crea por primera vez el trabajo CRON
+DataWareHouseTools.createDataWareHouseJob();

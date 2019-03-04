@@ -88,4 +88,8 @@ ActorSchema.methods.verifyPassword = function (password, cb) {
   });
 };
 
+
+//INDICES
+
+
 module.exports = mongoose.model('Actor', ActorSchema);
