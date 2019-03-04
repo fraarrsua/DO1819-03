@@ -103,7 +103,7 @@ applicationSchema.pre('save', function(next){
 
 //INDICES
 //Búsqueda por estado devuelve applications ordenadas por viaje
-applicationSchema.index({trip:1, status: 'text'});
+applicationSchema.index({tripID:1, status: 'text'});
 
 
 
