@@ -1,4 +1,6 @@
 var express = require('express'),
+    //fs = require('fs'),
+    //https = require('https'),
     app = express(),
     cors = require('cors'),
     port = process.env.PORT || 8080,
@@ -14,6 +16,14 @@ var express = require('express'),
     bodyParser = require('body-parser')
     admin = require("firebase-admin"),
     serviceAccount = require("../do1919-certs/asas-cloudteam-firebase-adminsdk-4oxdu-62035794f7");
+
+    //HTTPS CERTS OPTIONS
+    /*const options = {
+        key: fs.readFileSync('./keys/cloudTeamServer.key'),
+        cert: fs.readFileSync('./keys/cloudTeamServer.cert')
+      };*/
+
+    
 
 // MongoDB URI building
 var mongoDBHostname = process.env.mongoDBHostname || "localhost";
@@ -70,7 +80,10 @@ mongoose.connection.on("open", function (err, conn) {
     app.listen(port, function () {
         console.log('ACME-Explorer-CloudTeam RESTful API server started on: http://localhost:' + port + "/");
     });
+    //https.createServer(options, app).listen(port);
 });
+
+
 
 mongoose.connection.on("error", function (err, conn) {
     console.error("DB init error " + err);
