@@ -1,6 +1,7 @@
 'use strict';
-module.exports = function(app) {
-  var actors = require('../controllers/actorController');
+module.exports = function (app) {
+  var actors = require('../controllers/actorController'),
+  authController = require('../controllers/authController');
 
   /**
    * Get an actor (any role)
@@ -15,7 +16,7 @@ module.exports = function(app) {
    * @param {string} role (manager|administrator|explorer|sponsor) 
   */
   app.route('/v1/actors')
-	  //.get(actors.list_all_actors)
+    //.get(actors.list_all_actors)
     .post(actors.create_an_actor);
 
   /**
@@ -27,11 +28,11 @@ module.exports = function(app) {
 	 * @section actors
 	 * @type get put
 	 * @url /v1/actors/:actorId
-  */  
+  */
   app.route('/v1/actors/:actorId')
     .get(actors.read_an_actor)
-	  .put(actors.update_an_actor)
-    //.delete(actors.delete_an_actor);
+    .put(actors.update_an_actor_v1);
+  //.delete(actors.delete_an_actor);
 
   /**
 	 * Put to Validate a clerk by actorId
@@ -43,5 +44,23 @@ module.exports = function(app) {
 	 * @param {string} actorId
 	*/
   app.route('/v1/actors/:actorId/ban')
-  .put(actors.ban_an_actor)
+    .put(actors.ban_an_actor);
+
+
+
+  /**
+    * Put an actor
+    *    RequiredRoles: to be the proper actor
+    * Get an actor
+    *    RequiredRoles: any
+    *
+    * @section actors
+    * @type get put
+    * @url /v1/actors/:actorId
+   */
+  app.route('/v2/actors/:actorId')
+    .get(actors.read_an_actor)
+    .put(authController.verifyUser(["SPONSOR", "ADMINISTRATOR", "EXPLORER", "MANAGER"])
+      , actors.update_an_actor_v2) //Todos pueden editar su perfil
 };
+
