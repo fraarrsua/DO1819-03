@@ -1,5 +1,8 @@
 var express = require('express'),
+    //fs = require('fs'),
+    //https = require('https'),
     app = express(),
+    cors = require('cors'),
     port = process.env.PORT || 8080,
     mongoose = require('mongoose'),
     //Models
@@ -10,7 +13,17 @@ var express = require('express'),
     Sponsorship = require('./api/models/sponsorshipModel'),
     DataWareHouse = require('./api/models/dataWareHouseModel'),
     DataWareHouseTools = require('./api/controllers/dataWareHouseController'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser')
+    admin = require("firebase-admin"),
+    serviceAccount = require("../do1919-certs/asas-cloudteam-firebase-adminsdk-4oxdu-62035794f7");
+
+    //HTTPS CERTS OPTIONS
+    /*const options = {
+        key: fs.readFileSync('./keys/cloudTeamServer.key'),
+        cert: fs.readFileSync('./keys/cloudTeamServer.cert')
+      };*/
+
+    
 
 // MongoDB URI building
 var mongoDBHostname = process.env.mongoDBHostname || "localhost";
@@ -33,6 +46,15 @@ mongoose.connect(mongoDBURI, {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
+
+
+//Fragmento de configuración del SDK de administración
+var adminConfig = {
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: 'https://asas-cloudteam.firebaseio.com'
+};
+admin.initializeApp(adminConfig);
 
 var routesActors = require('./api/routes/actorRoutes');
 var routesSponsorships = require('./api/routes/sponsorshipRoutes');
@@ -40,6 +62,7 @@ var routesTrips = require('./api/routes/tripRoutes');
 var routesApplications = require('./api/routes/applicationRoutes');
 var routesFinders = require('./api/routes/finderRoutes');
 var routesDataWareHouse = require('./api/routes/dataWareHouseRoutes');
+var routesLogin = require('./api/routes/loginRoutes');
 
 
 routesFinders(app);
@@ -48,7 +71,7 @@ routesSponsorships(app);
 routesTrips(app);
 routesApplications(app);
 routesDataWareHouse(app);
-
+routesLogin(app);
 
 
 
@@ -57,7 +80,10 @@ mongoose.connection.on("open", function (err, conn) {
     app.listen(port, function () {
         console.log('ACME-Explorer-CloudTeam RESTful API server started on: http://localhost:' + port + "/");
     });
+    //https.createServer(options, app).listen(port);
 });
+
+
 
 mongoose.connection.on("error", function (err, conn) {
     console.error("DB init error " + err);
