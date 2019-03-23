@@ -84,7 +84,7 @@ ActorSchema.pre('save', function (callback) {
 //Controlar si la contraseña viene hasheada
 ActorSchema.methods.verifyPassword = function (password, cb) {
   bcrypt.compare(password, this.password, function (err, isMatch) {
-    console.log(Date() + ': Verifying password in ActorModel: ' +password);
+    console.log(Date() + ': Verifying password in ActorModel');
     if (err) return cb(err);
     console.log(Date()+': ¿Is match?: ' + isMatch);
     cb(null, isMatch);

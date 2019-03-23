@@ -1,5 +1,5 @@
 var express = require('express'),
-    //fs = require('fs'),
+    fs = require('fs'),
     //https = require('https'),
     app = express(),
     cors = require('cors'),
@@ -89,6 +89,9 @@ mongoose.connection.on("open", function (err, conn) {
     //https.createServer(options, app).listen(port);
 });
 
+app.get('/', function (req, res) {
+    res.redirect('/docs');
+});
 
 
 mongoose.connection.on("error", function (err, conn) {

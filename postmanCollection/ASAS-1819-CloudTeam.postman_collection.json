@@ -23,7 +23,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Explorer-Name-01\",\n\t\"surname\": \"Explorer-Surname-01\",\n\t\"email\": \"Explorer-01@fakemail.com\",\n\t\"phone\": \"+34612345678\",\n\t\"address\": \"myAddress\",\n\t\"password\": \"mypass\",\n\t\"role\": \"EXPLORER\"\n}"
+							"raw": "{\n\t\"_id\": \"5c7a95c28968263a683b6bf4\",\n\t\"name\": \"Explorer-Name-04\",\n\t\"surname\": \"Explorer-Surname-04\",\n\t\"email\": \"Explorer-04@fakemail.com\",\n\t\"phone\": \"+34612345678\",\n\t\"address\": \"myAddress\",\n\t\"password\": \"mypass\",\n\t\"role\": \"EXPLORER\"\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/v1/actors",
@@ -53,7 +53,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Administrator-Name-01\",\n\t\"surname\": \"Administrator-Surname-01\",\n\t\"email\": \"Administrator-01@fakemail.com\",\n\t\"phone\": \"+34612345678\",\n\t\"address\": \"myAddress\",\n\t\"password\": \"mypass\",\n\t\"role\": \"ADMINISTRATOR\"\n}"
+							"raw": "{\n\t\"_id\": \"5c7a95c28968263a683b6ba4\",\n\t\"name\": \"Admin-Name-04\",\n\t\"surname\": \"Admin-Sur-04\",\n\t\"email\": \"Admin-04@fakemail.com\",\n\t\"phone\": \"+34612345678\",\n\t\"address\": \"myAddress\",\n\t\"password\": \"mypass\",\n\t\"role\": \"ADMINISTRATOR\"\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/v1/actors",
@@ -139,7 +139,8 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/v1/actors/5c75c1704897633db069e9ac",
+							"raw": "http://localhost:8080/v1/actors/5c7a95c28968263a683b6bf1",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -147,7 +148,7 @@
 							"path": [
 								"v1",
 								"actors",
-								"5c75c1704897633db069e9ac"
+								"5c7a95c28968263a683b6bf1"
 							]
 						}
 					},
@@ -163,7 +164,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/v1/actors/5c75c1704897633db069e9ac/ban",
+							"raw": "localhost:8080/v1/actors/5c7a95c28968263a683b6bf4/ban",
 							"host": [
 								"localhost"
 							],
@@ -171,7 +172,7 @@
 							"path": [
 								"v1",
 								"actors",
-								"5c75c1704897633db069e9ac",
+								"5c7a95c28968263a683b6bf4",
 								"ban"
 							]
 						}
@@ -192,10 +193,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Explorer-Name-01\",\n\t\"surname\": \"Explorer-Surname-01\",\n\t\"email\": \"Explorer-01@fakemail.com\",\n\t\"phone\": \"+34612345678\",\n\t\"address\": \"myAddress\",\n\t\"password\": \"mypass\",\n\t\"role\": \"EXPLORER\",\n\t\"preferredLanguage\": \"es\"\n}"
+							"raw": "{\n\t\"name\": \"Administrator-Name-03\",\n\t\"surname\": \"Administrator-Surname-03\",\n\t\"email\": \"Administrator-3@fakemail.com\",\n\t\"phone\": \"+34612345678\",\n\t\"address\": \"myAddress\",\n\t\"password\": \"mypass\",\n\t\"role\": \"ADMINISTRATOR\"\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/v1/actors/5c75c1704897633db069e9ac",
+							"raw": "localhost:8080/v1/actors/5c7a95c28968263a683b6ba3",
 							"host": [
 								"localhost"
 							],
@@ -203,7 +204,7 @@
 							"path": [
 								"v1",
 								"actors",
-								"5c75c1704897633db069e9ac"
+								"5c7a95c28968263a683b6ba3"
 							]
 						}
 					},
@@ -440,7 +441,8 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/v1/sponsorships",
+							"raw": "http://localhost:8080/v1/sponsorships",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
