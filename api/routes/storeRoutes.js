@@ -45,8 +45,8 @@ module.exports = function(app) {
 	 * @param {string} sourceFile   //mandatory
 	 * @param {string} batchSize   //optional
 	 * @param {string} parseString //optional
-	 * Sample 1: http://localhost:8080/v1/store/url?dbURL=mongodb://admin:admin@localhost:27017/ACME-Explorer&collection=test&batchSize=100&parseString=rows.*&sourceURL=http://drive.google.com/uc?export=download&id=1kkIbpDMoNjy9BSWOI9xPlCxA7nfv4N0v
-	 * Sample 2: http://localhost:8080/v1/store/url?dbURL=mongodb://admin:admin@localhost:27017/ACME-Explorer&collection=actors&batchSize=100&parseString=*&sourceURL=http://drive.google.com/uc?export=download&id=1kkIbpDMoNjy9BSWOI9xPlCxA7nfv4N0v
+	 * Sample 1: http://localhost:8080/v1/store/url?dbURL=mongodb://admin:admin@localhost:27017/ACME-Explorer&collection=test&batchSize=100&parseString=rows.*&sourceURL=http://drive.google.com/uc?export=download%26id=1kkIbpDMoNjy9BSWOI9xPlCxA7nfv4N0v
+	 * Sample 2: http://localhost:8080/v1/store/url?dbURL=mongodb://admin:admin@localhost:27017/ACME-Explorer&collection=actors&batchSize=100&parseString=*&sourceURL=http://drive.google.com/uc?export=download%26id=1kkIbpDMoNjy9BSWOI9xPlCxA7nfv4N0v
   */ 
   app.route('/v1/store/url')
  		.post(store.store_json_url);

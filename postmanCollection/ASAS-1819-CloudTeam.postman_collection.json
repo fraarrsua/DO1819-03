@@ -83,7 +83,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Manager-Name-01\",\n\t\"surname\": \"Manager-Surname-01\",\n\t\"email\": \"Manager-01@fakemail.com\",\n\t\"phone\": \"+34612345678\",\n\t\"address\": \"myAddress\",\n\t\"password\": \"mypass\",\n\t\"role\": \"MANAGER\"\n}"
+							"raw": "{\n\t\"name\": \"Manager-Name-04\",\n\t\"surname\": \"Manager-Surname-04\",\n\t\"email\": \"Manager-04@fakemail.com\",\n\t\"phone\": \"+34612345678\",\n\t\"address\": \"myAddress\",\n\t\"password\": \"mypass\",\n\t\"role\": \"MANAGER\"\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/v1/actors",
@@ -733,6 +733,144 @@
 							"path": [
 								"v1",
 								"dataWareHouse"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "STORE",
+			"item": [
+				{
+					"name": "POST STORE <16MB",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/store/insertMany?dbURL=mongodb://myUser:myUserPassword@localhost:27017/ACME-Explorer&mongooseModel=Actor&sourceFile=C:\\Users\\Sojer\\Documents\\workspaces\\ASAS\\ASAS-collections\\actors.json",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"store",
+								"insertMany"
+							],
+							"query": [
+								{
+									"key": "dbURL",
+									"value": "mongodb://myUser:myUserPassword@localhost:27017/ACME-Explorer"
+								},
+								{
+									"key": "mongooseModel",
+									"value": "Actor"
+								},
+								{
+									"key": "sourceFile",
+									"value": "C:\\Users\\Sojer\\Documents\\workspaces\\ASAS\\ASAS-collections\\actors.json"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST STORE FileStream",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/store/fs?dbURL=mongodb://admin:admin@localhost:27017/ACME-Explorer&collection=actor-fs&batchSize=100&parseString=*&sourceFile=C:\\Users\\Sojer\\Documents\\workspaces\\ASAS\\ASAS-collections\\streamactors.json",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"store",
+								"fs"
+							],
+							"query": [
+								{
+									"key": "dbURL",
+									"value": "mongodb://admin:admin@localhost:27017/ACME-Explorer"
+								},
+								{
+									"key": "collection",
+									"value": "actor-fs"
+								},
+								{
+									"key": "batchSize",
+									"value": "100"
+								},
+								{
+									"key": "parseString",
+									"value": "*"
+								},
+								{
+									"key": "sourceFile",
+									"value": "C:\\Users\\Sojer\\Documents\\workspaces\\ASAS\\ASAS-collections\\streamactors.json"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST STORE FileStream(URL)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/store/url?dbURL=mongodb://admin:admin@localhost:27017/ACME-Explorer&collection=actors-store&batchSize=100&parseString=*&sourceURL=http://drive.google.com/uc?export=download%26id=1kkIbpDMoNjy9BSWOI9xPlCxA7nfv4N0v",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"store",
+								"url"
+							],
+							"query": [
+								{
+									"key": "dbURL",
+									"value": "mongodb://admin:admin@localhost:27017/ACME-Explorer"
+								},
+								{
+									"key": "collection",
+									"value": "actors-store"
+								},
+								{
+									"key": "batchSize",
+									"value": "100"
+								},
+								{
+									"key": "parseString",
+									"value": "*"
+								},
+								{
+									"key": "sourceURL",
+									"value": "http://drive.google.com/uc?export=download%26id=1kkIbpDMoNjy9BSWOI9xPlCxA7nfv4N0v"
+								}
 							]
 						}
 					},
