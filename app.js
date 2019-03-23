@@ -14,8 +14,8 @@ var express = require('express'),
     DataWareHouse = require('./api/models/dataWareHouseModel'),
     DataWareHouseTools = require('./api/controllers/dataWareHouseController'),
     bodyParser = require('body-parser')
-    //admin = require("firebase-admin"),
-    //serviceAccount = require("../do1919-certs/asas-cloudteam-firebase-adminsdk-4oxdu-62035794f7");
+    admin = require("firebase-admin"),
+    serviceAccount = require("../ASAS-certs/asas-cloudteam-firebase-adminsdk-4oxdu-0115ceb4ac");
 
     //HTTPS CERTS OPTIONS
     /*const options = {
@@ -54,11 +54,11 @@ app.use(cors());
 
 
 //Fragmento de configuración del SDK de administración
-/*var adminConfig = {
+var adminConfig = {
     credential: admin.credential.cert(serviceAccount),
     databaseURL: 'https://asas-cloudteam.firebaseio.com'
 };
-admin.initializeApp(adminConfig);*/
+admin.initializeApp(adminConfig);
 
 var routesActors = require('./api/routes/actorRoutes');
 var routesSponsorships = require('./api/routes/sponsorshipRoutes');
