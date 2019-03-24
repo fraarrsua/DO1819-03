@@ -66,13 +66,6 @@ var DataWareHouseSchema = new mongoose.Schema({
   rebuildPeriod: {
     type: String
   }
-<<<<<<< HEAD
-}, { strict: false });
-
-DataWareHouseSchema.index({ computationMoment: -1 });
-
-module.exports = mongoose.model('DataWareHouse', DataWareHouseSchema);
-=======
 
 }, { strict: false });
 
@@ -82,4 +75,3 @@ module.exports = mongoose.model('DataWareHouse', DataWareHouseSchema);
 DataWareHouseSchema.index({ computationMoment: -1 });
 
 module.exports = mongoose.model('DataWareHouse', DataWareHouseSchema);
->>>>>>> be0037f2b1dbf966c5a65089955a20ce9c13b70e
