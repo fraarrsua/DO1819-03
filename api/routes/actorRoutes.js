@@ -72,7 +72,7 @@ module.exports = function (app) {
      * @param {string} role (administrator) 
     */
   app.route('/v2/actors')
-    .get(authController.verifyUser(["ADMINISTRATOR"]), actors.list_all_actors);
+    .get(authController.verifyUser(["ADMINISTRATOR"]), actors.list_all_actors_v2);
 
 
   /**
@@ -87,7 +87,7 @@ module.exports = function (app) {
    */
   app.route('/v2/actors/:actorId')
     .get(authController.verifyUser(["ADMINISTRATOR", "EXPLORER", "MANAGER", "SPONSOR"]), actors.read_an_actor_v2)
-    .put(authController.verifyUser(["SPONSOR", "ADMINISTRATOR", "EXPLORER", "MANAGER"]), actors.update_an_actor_v2); //Todos pueden editar su perfil
+    .put(authController.verifyUser(["ADMINISTRATOR", "EXPLORER", "MANAGER", "SPONSOR"]), actors.update_an_actor_v2); //Todos pueden editar su perfil
 
   /**
 	 * Put to Ban an EXPLORER by actorId
