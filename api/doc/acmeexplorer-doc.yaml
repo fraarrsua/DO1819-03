@@ -134,6 +134,34 @@ paths:
         '404':
           description: Actor not found
       x-swagger-router-controller: Actor
+  /actors/{actorID}/unban:
+    put:
+      tags:
+        - Actor
+      summary: Unban an actor
+      description: This can only be done by the logged in user.
+      operationId: unban_an_actor
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: actorID
+          in: path
+          description: Unban an actor by ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Unban an actor object
+          required: true
+          schema:
+            $ref: '#/definitions/Actor'
+      responses:
+        '400':
+          description: Invalid actor ID supplied
+        '404':
+          description: Actor not found
+      x-swagger-router-controller: Actor    
   /trips:
     get:
       tags:

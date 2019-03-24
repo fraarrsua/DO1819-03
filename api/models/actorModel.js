@@ -1,6 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var Schema = mongoose.Schema;
 
 var ActorSchema = new Schema({
@@ -14,41 +14,44 @@ var ActorSchema = new Schema({
   },
   email: {
     type: String,
-    unique: true,
+    //unique: true,
     required: 'Kindly enter the actor email',
-    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+    //match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
   },
   phone: {
     type: String
   },
-  address:{
+  address: {
     type: String
   },
   password: {
     type: String,
-    minlength:5,
+    minlength: 5,
     required: 'Kindly enter the actor password'
   },
-  preferredLanguage:{
-    type : String,
-    default : 'en'
+  preferredLanguage: {
+    type: String,
+    default: 'en'
   },
   role: {
     type: String,
     required: 'Kindly enter the user role',
     enum: ['EXPLORER', 'MANAGER', 'ADMINISTRATOR', 'SPONSOR']
   },
-  banned:{
+  banned: {
     type: Boolean,
     default: false
   },
-  flatRatePaid:{
+  flatRatePaid: {
     type: Boolean,
     default: false
   },
-  finderID:{
+  finderID: {
     type: Schema.Types.ObjectId,
     ref: "Finder"
+  },
+  customToken: {
+    type: String
   },
   created: {
     type: Date,
@@ -62,9 +65,9 @@ ActorSchema.pre('save', function (callback) {
   var actor = this;
 
   // Sale si la contraseña no ha cambiado
-  if (!actor.isModified('password')){
+  if (!actor.isModified('password')) {
     return callback();
-  } 
+  }
 
   // Si la contraseña ha cambiado la hasheamos
   bcrypt.genSalt(5, function (err, salt) {
@@ -81,9 +84,9 @@ ActorSchema.pre('save', function (callback) {
 //Controlar si la contraseña viene hasheada
 ActorSchema.methods.verifyPassword = function (password, cb) {
   bcrypt.compare(password, this.password, function (err, isMatch) {
-    console.log(Date()+': Verifying password in ActorModel: ' + password);
+    console.log(Date() + ': Verifying password in ActorModel');
     if (err) return cb(err);
-    console.log('isMatch: ' + isMatch);
+    console.log(Date()+': ¿Is match?: ' + isMatch);
     cb(null, isMatch);
   });
 };

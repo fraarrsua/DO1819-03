@@ -210,7 +210,7 @@ function computeRatioCancelledOrders (callback) {
 =======
 //Periodo por defecto en el que se van a ejecutar todas estas agregaciones.
 //En este ejemplo se recomputan las agregaciones cada 10 segundos (No recomendable con grandes volumenes de datos)
-var rebuildPeriod = '*/30 * * * * *';  //El que se usará por defecto
+var rebuildPeriod = '0 0 * * * *';  //El que se usará por defecto
 var computeDataWareHouseJob;
 
 //Contesta a la petición post en la que un administrador puede indicar un nuevo periodo de computación
@@ -250,7 +250,7 @@ function createDataWareHouseJob() {
             }
             else {
                 //Se almacenan los resultados de la computaciones y los guardo en el datawarehouse
-                console.log("Resultados obtenidos por las agregaciones: "+JSON.stringify(results));
+                //console.log("Resultados obtenidos por las agregaciones: "+JSON.stringify(results));
                 new_dataWareHouse.tripsManagerStats = results[0];
                 new_dataWareHouse.applicationsTripStats = results[1];
                 new_dataWareHouse.priceTripStats = results[2];
@@ -264,8 +264,8 @@ function createDataWareHouseJob() {
                         console.log("Error saving datawarehouse: " + err);
                     }
                     else {
-                        console.log(Date()+": new DataWareHouse succesfully saved. Date: " + new Date());
-                        console.log(datawarehouse);
+                        console.log(Date() + ": new DataWareHouse succesfully saved. Date: " + new Date());
+                        //console.log(datawarehouse);
                     }
                 });
             }
@@ -279,7 +279,7 @@ module.exports.createDataWareHouseJob = createDataWareHouseJob;
 
 //La media, minimo, máximo y desviación estándar del número de viajes controlados por manager.
 function computeTripsManagerStats(callback) {
-    console.log("Ejecuta computeTripsManagerStats");
+    //console.log("Ejecuta computeTripsManagerStats");
     Trips.aggregate([
         {
             $group: {
@@ -298,7 +298,6 @@ function computeTripsManagerStats(callback) {
         },
         { $project: { _id: 0 } }
     ], function (err, res) {
-        console.log(res[0]);
         callback(err, res[0]);
     });
 
@@ -307,7 +306,7 @@ function computeTripsManagerStats(callback) {
 //La media, mínimo, máximo y desviación estándar del número de aplicaciones por viaje.
 
 function computeApplicationsTripStats(callback) {
-    console.log("Ejecuta computeApplicationsTripStats");
+    //console.log("Ejecuta computeApplicationsTripStats");
 
     Applications.aggregate([
         { $group: { _id: "$tripID", applicationTrips: { $sum: 1 } } },
@@ -321,7 +320,6 @@ function computeApplicationsTripStats(callback) {
             }
         }
     ], function (err, res) {
-        console.log(res[0]);
         callback(err, res[0]);
     });
 
@@ -330,7 +328,7 @@ function computeApplicationsTripStats(callback) {
 //La media, mínimo, máximo y desviación estándar del precio de los viajes.
 
 function computePriceTripStats(callback) {
-    console.log("Ejecuta computePriceTripStats");
+    //console.log("Ejecuta computePriceTripStats");
 
     Trips.aggregate([
         {
@@ -349,7 +347,6 @@ function computePriceTripStats(callback) {
             }
         }
     ], function (err, res) {
-        console.log(res[0]);
         callback(err, res[0])
     });
 };
@@ -357,8 +354,8 @@ function computePriceTripStats(callback) {
 //El ratio de aplicaciones agrupadas por estado (DUE, PENDING, ACCEPTED...).
 
 function computeApplicationsRatioPerStatus(callback) {
-    console.log("Ejecuta computeApplicationsRatioPerStatus");
-    
+    //console.log("Ejecuta computeApplicationsRatioPerStatus");
+
     Applications.aggregate([
         {
             $facet: {
@@ -371,7 +368,6 @@ function computeApplicationsRatioPerStatus(callback) {
         { $unwind: "$groupsTotal" },
         { $project: { _id: 0, status: "$groupsTotal._id", ratio: { $divide: ["$groupsTotal.total", "$totalApplications"] } } }
     ], function (err, res) {
-        console.log(res[0]);
         callback(err, res[0])
     });
 };

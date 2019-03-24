@@ -22,7 +22,7 @@ exports.post_a_finder = function (req, res) {
 
 
 exports.list_all_finders = function (req, res) {
-  console.log(Date() + ": " + "GEST /v1/finders");
+  console.log(Date() + ": " + "GET /v1/finders");
 
   Finder.find({}, function (err, finders) {
     if (err) {
