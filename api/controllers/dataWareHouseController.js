@@ -75,8 +75,8 @@ function createDataWareHouseJob() {
             computeTripsManagerStats,
             computeApplicationsTripStats,
             computePriceTripStats,
-            computeApplicationsRatioPerStatus
-            //computeAveragePriceFinderStats,
+            computeApplicationsRatioPerStatus,
+            computeAveragePriceFinderStats,
             //computeTopKeywordsFinderStats
         ], function (err, results) { //Función que recoje los resultados de las computaciones anteriores
             if (err) {
@@ -210,6 +210,17 @@ function computeApplicationsRatioPerStatus(callback) {
 
 function computeAveragePriceFinderStats(callback) {
 
+    Finders.aggregate([
+        $group, {
+            _id: 0,
+            finders: { $sum: 1 }
+        },
+
+        avgMinPrice, {$avg: "$priceMin"},
+        avgMaxPrice, {$avg: "$priceMax"}
+    ],  function (err, res) {
+        callback(err, res[0])
+    });
 };
 
 //Una lista con las 10 keywords más repetidas en las búsquedas, ordenadas de mayor a menor.
