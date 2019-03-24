@@ -91,13 +91,8 @@ ActorSchema.methods.verifyPassword = function (password, cb) {
   });
 };
 
-<<<<<<< HEAD
-ActorSchema.index({ name: 'text', surname: 'text', role: 'text'});
-FinderSchema.index({ keyword: 'text'});
-=======
 
 //INDICES
 
->>>>>>> be0037f2b1dbf966c5a65089955a20ce9c13b70e
 
 module.exports = mongoose.model('Actor', ActorSchema);
