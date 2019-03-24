@@ -50,6 +50,12 @@ var tripSchema = new Schema({
     },
     unique: true
   },
+  status: {
+    type: String,
+    required: true,
+    default: 'CREATED',
+    enum: ['PUBLISHED', 'CANCELLED', 'CREATED', 'STARTED', 'ENDED']
+  },
   title: {
     type: String,
     required: 'Kindly enter the title of the trip'
@@ -130,10 +136,15 @@ tripSchema.pre('save', function (next) {
 });
 
 tripSchema.pre('findOneAndUpdate', function (next) {
-  var stages_price = this._update.stages.map((stage) => stage.price);
-  var totalPrice = stages_price.reduce((a, b) => a + b, 0);
-  this.update({}, { $set: { price: totalPrice } });
-  next();
+  if (this._update['$set'].status == "CANCELLED") {
+    console.log(Date()+": Changing trip status to CANCELLED.");
+    next();
+  } else {
+    var stages_price = this._update.stages.map((stage) => stage.price);
+    var totalPrice = stages_price.reduce((a, b) => a + b, 0);
+    this.update({}, { $set: { price: totalPrice } });
+    next();
+  }
 });
 
 //Check if the author is an MANAGER
@@ -166,11 +177,11 @@ tripSchema.index({title: 'text', description: 'text', ticker: 'text'});
 StageSchema.index({price:1});
 StageSchema.index({title: 'text', description: 'text'});
 
- //INDICES
- //Búsqueda por precio de forma ascendente
- tripSchema.index({price:1});
- //Índice para la búsqueda de trips por keyword
- tripSchema.index({title:'text', description: 'text', ticker: 'text'});
+//INDICES
+//Búsqueda por precio de forma ascendente
+tripSchema.index({ price: 1 });
+//Índice para la búsqueda de trips por keyword
+tripSchema.index({ title: 'text', description: 'text', ticker: 'text' });
 
 module.exports = mongoose.model('Trip', tripSchema);
 module.exports = mongoose.model('Stage', StageSchema);

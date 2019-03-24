@@ -1,14 +1,12 @@
 'use strict';
 module.exports = function (app) {
-  var trips = require('../controllers/tripController');
+  var trips = require('../controllers/tripController'),
+  authController = require('../controllers/authController');
 
   /**
-   * Manage catalogue of trips: 
    * Post trips
    *    RequiredRoles: Manager
-   *    tripStatus --> UNPUBLISHED
-   * Get trips 
-   *    RequiredRoles: Manager
+   * Get trips
    *
    * @section trips
    * @type get post 
@@ -31,17 +29,16 @@ module.exports = function (app) {
  */
   app.route('/v1/trips/search')
     .get(trips.search_trips)
+
   /**
    * Put a trip or update it
    *    RequiredRoles: Manager
-   *    RequiredStatus: tripStatus --> UNPUBLISHED
    *     
    * Delete a trip
    *    RequiredRoles: Manager
-   *    RequiredStatus: tripStatus --> UNPUBLISHED
    * 
    * Get a trip
-   *    RequiredRoles: Manager
+   *    RequiredRoles: None
    * 
    * @section trips
    * @type get put delete 
@@ -52,12 +49,59 @@ module.exports = function (app) {
     .put(trips.update_a_trip)
     .delete(trips.delete_a_trip);
 
-  /*app.route('/v0/categories')
-    .get(trips.list_all_categories)
-    .post(trips.create_a_category);
+  /**
+* Put to cancel a trip
+        RequiredRoles: None
+* @section trips
+* @type put 
+* @url /v1/trips/:tripId/cancel
+*/
+  app.route('/v1/trips/:tripID/cancel')
+    .put(trips.cancel_a_trip);
 
-  app.route('/v0/categories/:categId')*/
-  //.get(trips.read_a_category)
-  //.put(trips.update_a_category)
-  //.delete(trips.delete_a_category);
+
+
+  /**------------v2 METHODS------------ */
+  /**
+ * Post trips
+ *    RequiredRoles: Manager
+ * Get trips
+ *
+ * @section trips
+ * @type get post 
+ * @url /v2/trips
+*/
+  app.route('/v2/trips')
+    .get(trips.list_all_trips)
+    .post(authController.verifyUser(["MANAGER"]), trips.create_a_trip_v2);
+
+
+  /**
+* Put a trip or update it
+*    RequiredRoles: Manager
+*     
+* Delete a trip
+*    RequiredRoles: Manager
+* 
+* Get a trip
+*    RequiredRoles: None
+* 
+* @section trips
+* @type get put delete 
+* @url /v2/trips/:tripId
+*/
+  app.route('/v2/trips/:tripID')
+    .get(trips.read_a_trip_v2)
+    .put(authController.verifyUser(["MANAGER"]), trips.update_a_trip_v2)
+    .delete(authController.verifyUser(["MANAGER"]), trips.delete_a_trip_v2);
+
+  /**
+  * Put to cancel a trip
+  * @section trips
+  * @type put 
+  * @url /v2/trips/:tripId/cancel
+  */
+  app.route('/v2/trips/:tripID/cancel')
+    .put(authController.verifyUser(["MANAGER"]), trips.cancel_a_trip_v2);
 };
+
