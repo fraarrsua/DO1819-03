@@ -21,6 +21,22 @@ exports.create_an_actor = function (req, res) {
   });
 };
 
+exports.list_all_actors = function (req, res) {
+
+  console.log(Date() + ": " + "GET /v1/actors/");
+
+  Actor.find(function (err, actors) {
+    if (err) {
+      console.log(Date() + ": " + err);
+      res.send(err);
+    }
+    else {
+      console.log(Date() + ": " + "All actors returned.");
+      res.status(200).send(actors);
+    }
+  });
+};
+
 exports.read_an_actor = function (req, res) {
 
   console.log(Date() + ": " + "GET /v1/actors/:actorId");
@@ -88,6 +104,36 @@ exports.ban_an_actor = function (req, res) {
   });
 };
 
+exports.unban_an_actor = function (req, res) {
+
+  console.log(Date() + ": " + "PUT /v1/actors/:actorId/unban");
+
+  var actorToUnBanId = req.params.actorId;
+  Actor.findById(actorToUnBanId, function (err, actorToUnBanId) {
+    if (err) {
+      console.log(Date() + ": " + err);
+      res.send(err);
+    } else {
+      if (actorToUnBanId.role != "EXPLORER") {
+        console.log(Date() + ": " + " WARNING. Trying to unban an actor with role: " + actorToUnBanId.role + ".")
+        res.sendStatus(403);
+      } else {
+        Actor.findOneAndUpdate({ _id: req.params.actorId }, { $set: { "banned": "false" } }, { new: true }, function (err, actor) {
+          if (err) {
+            console.log(Date() + ": " + err);
+            res.send(err);
+          }
+          else {
+            console.log(Date() + ": " + "Actor with email: '" + actor.email + " is now unbanned.");
+            res.status(200).send(actor);
+          }
+        });
+      }
+    }
+
+  });
+};
+
 
 exports.login_an_actor = async function(req, res) {
   console.log(Date()+': Starting loggin function');
@@ -144,11 +190,10 @@ exports.login_an_actor = async function(req, res) {
   });
 };
 
+/**------------------V2 METHODS---------------------- */
 
 /**El usuario me pasa el idToken
  * Primero se busca el usuario por actorId
- * 
- * 
  */
 exports.update_an_actor_v2 = function(req, res) {
   //Explorer and Manager can update theirselves, administrators can update any actor
@@ -196,3 +241,7 @@ exports.update_an_actor_v2 = function(req, res) {
   });
 
 };
+
+exports.read_an_actor_v2= function(req,res){}
+exports.ban_an_actor_v2= function(req,res){}
+exports.unban_an_actor_v2= function(req,res){}
