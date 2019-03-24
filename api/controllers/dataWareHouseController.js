@@ -207,19 +207,22 @@ function computeApplicationsRatioPerStatus(callback) {
 };
 
 //La media de priceMax y priceMin que los explorers indican en sus búsquedas.
-
 function computeAveragePriceFinderStats(callback) {
+
     Finders.aggregate([
-        $group, {
-            _id: 0,
-            finders: { $sum: 1 }
-        },
-        avgMinPrice, {$avg: "$priceMin"},
-        avgMaxPrice, {$avg: "$priceMax"}
-    ],  function (err, res) {
-        callback(err, res[0])
+        { $group: { _id: "$explorerID", total: { $sum: 1 } } },
+        {
+            $group: {
+                _id: 0,
+                avg: { $avg: "$priceMin" },
+                avg: { $avg: "$priceMax" }
+            }
+        }
+    ], function (err, res) {
+        callback(err, res[0]);
     });
-};
+}
+
 
 //Una lista con las 10 keywords más repetidas en las búsquedas, ordenadas de mayor a menor.
 function computeTopKeywordsFinderStats(callback) {
