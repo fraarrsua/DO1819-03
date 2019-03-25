@@ -12,6 +12,7 @@ var express = require('express'),
     Application = require('./api/models/applicationModel'),
     Sponsorship = require('./api/models/sponsorshipModel'),
     DataWareHouse = require('./api/models/dataWareHouseModel'),
+    globalConfig = require('./api/models/globalConfigModel'),
     DataWareHouseTools = require('./api/controllers/dataWareHouseController'),
     bodyParser = require('body-parser')
     admin = require("firebase-admin"),
@@ -68,7 +69,7 @@ var routesFinders = require('./api/routes/finderRoutes');
 var routesDataWareHouse = require('./api/routes/dataWareHouseRoutes');
 var routesLogin = require('./api/routes/loginRoutes');
 var routesStore = require('./api/routes/storeRoutes');
-
+var routesGlobalConfig = require('./api/routes/globalConfigRoutes');
 
 routesFinders(app);
 routesActors(app);
@@ -78,6 +79,7 @@ routesApplications(app);
 routesDataWareHouse(app);
 routesLogin(app);
 routesStore(app);
+routesGlobalConfig(app);
 
 
 
