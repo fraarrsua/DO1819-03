@@ -204,7 +204,7 @@ exports.search_trips = function (req, res) {
     sort += req.query.sortedBy;
   }
 
-  console.log("Query: " + JSON.stringify(query) + " Skip:" + skip + " Limit:" + limit + " Sort:" + sort);
+  console.log(Date() + ": Query: " + JSON.stringify(query) + " Skip:" + skip + " Limit:" + limit + " Sort:" + sort);
 
   Trip.find(query)
     .sort(sort)
@@ -219,9 +219,6 @@ exports.search_trips = function (req, res) {
         res.json(trips);
       }
     });
-
-
-  console.log('Searching an trip depending on params');
 };
 
 

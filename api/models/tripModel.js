@@ -172,8 +172,6 @@ tripSchema.pre('save', function (next) {
   }
 });
 
-tripSchema.index({price:1});
-tripSchema.index({title: 'text', description: 'text', ticker: 'text'});
 StageSchema.index({price:1});
 StageSchema.index({title: 'text', description: 'text'});
 
