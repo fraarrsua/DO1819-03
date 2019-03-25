@@ -120,7 +120,7 @@ exports.search_trips = function (req, res) {
 
   Trip.find(query)
     .sort(sort)
-    .skip(skip)
+    .skip(skip) 
     .limit(limit)
     .lean()
     .exec(function (err, trips) {
