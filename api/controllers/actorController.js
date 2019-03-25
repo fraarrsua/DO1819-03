@@ -53,8 +53,6 @@ exports.read_an_actor = function (req, res) {
   });
 };
 
-
-//Añadir 
 exports.update_an_actor_v1 = function (req, res) {
 
   console.log(Date() + ": " + "PUT /v1/actors/:"+ req.params.actorId);
@@ -242,6 +240,7 @@ exports.update_an_actor_v2 = function(req, res) {
 
 };
 
+exports.list_all_actors_v2= function(req,res){}
 exports.read_an_actor_v2= function(req,res){}
 exports.ban_an_actor_v2= function(req,res){}
 exports.unban_an_actor_v2= function(req,res){}

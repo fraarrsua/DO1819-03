@@ -44,7 +44,7 @@ var CronTime = require('cron').CronTime;
 //'* * * * * *' cada segundo
 //Periodo por defecto en el que se van a ejecutar todas estas agregaciones.
 //En este ejemplo se recomputan las agregaciones cada 10 segundos (No recomendable con grandes volumenes de datos)
-var rebuildPeriod = '0 0 * * * *';  //El que se usará por defecto
+var rebuildPeriod = '*/30 * * * * *';  //El que se usará por defecto
 var computeDataWareHouseJob;
 
 //Contesta a la petición post en la que un administrador puede indicar un nuevo periodo de computación
@@ -75,9 +75,9 @@ function createDataWareHouseJob() {
             computeTripsManagerStats,
             computeApplicationsTripStats,
             computePriceTripStats,
-            computeApplicationsRatioPerStatus
-            //computeAveragePriceFinderStats,
-            //computeTopKeywordsFinderStats
+            computeApplicationsRatioPerStatus,
+            computeAveragePriceFinderStats,
+            computeTopKeywordsFinderStats
         ], function (err, results) { //Función que recoje los resultados de las computaciones anteriores
             if (err) {
                 console.log("Error computing datawarehouse: " + err);
@@ -207,12 +207,38 @@ function computeApplicationsRatioPerStatus(callback) {
 };
 
 //La media de priceMax y priceMin que los explorers indican en sus búsquedas.
-
 function computeAveragePriceFinderStats(callback) {
 
-};
+    Finders.aggregate([
+        { $group: { _id: "$explorerID", total: { $sum: 1 } } },
+        {
+            $group: {
+                _id: 0,
+                avg: { $avg: "$priceMin" },
+                avg: { $avg: "$priceMax" }
+            }
+        }
+    ], function (err, res) {
+        callback(err, res[0]);
+    });
+}
+
 
 //Una lista con las 10 keywords más repetidas en las búsquedas, ordenadas de mayor a menor.
 function computeTopKeywordsFinderStats(callback) {
 
+    Finders.aggregate(
+        [
+            { $sort: { keyword: 1 } },
+            { $limit: 10 },
+            {
+                $group: {
+                    _id: '$keyword',
+                    total: { $sum: 1 }
+                }
+            },
+            { $sort: { _id: 1 } }
+        ], function (err, res) {
+            callback(err, res[0]);
+        });
 };

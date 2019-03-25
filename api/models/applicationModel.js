@@ -100,6 +100,7 @@ applicationSchema.pre('save', function(next){
   }
 });
 
+applicationSchema.index({status: 'text'});
 
 //INDICES
 //Búsqueda por estado devuelve applications ordenadas por viaje
