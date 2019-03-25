@@ -26,7 +26,7 @@ exports.create_a_trip = function (req, res) {
   console.log(Date() + ": " + "POST /v1/trips");
 
   var new_trip = new Trip(req.body);
-  
+
   new_trip.save(function (err, trip) {
     if (err) {
       console.log(Date() + ": " + err);
@@ -91,9 +91,45 @@ exports.delete_a_trip = function (req, res) {
 
 exports.search_trips = function (req, res) {
   console.log(Date() + ": " + "GET /v1/trips/search");
+  var query = {};
+  var skip = 0;
+  var limit = 0;
+  var sort = "";
 
-  //Check if keyword param exists (keyword: req.query.keyword)
-  //Search depending on params but only if deleted = false
+  if (req.query.keyword) {
+    query.$text = { $search: req.query.keyword }
+  }
+
+  if (req.query.beginFrom) {
+    skip = parseInt(req.query.beginFrom);
+  }
+
+  if (req.query.pageSize) {
+    limit = parseInt(req.query.pageSize);
+  }
+
+  if (req.query.backwards == "true") {
+    sort = "-";
+  }
+
+  if (req.query.sortedBy) {
+    sort += req.query.sortedBy;
+  }
+
+  console.log("Query: " + JSON.stringify(query) + " Skip:" + skip + " Limit:" + limit + " Sort:" + sort);
+
+  Trip.find(query)
+    .sort(sort)
+    .skip(skip)
+    .limit(limit)
+    .lean()
+    .exec(function (err, trips) {
+      if (err) {
+        res.send(err);
+      }
+      else {
+        res.json(trips);
+      }
+    });
   console.log('Searching an trip depending on params');
-  res.send('Trip returned from the trip search');
 };
