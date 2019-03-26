@@ -1,8 +1,7 @@
 'use strict';
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema,
-    Actor = mongoose.model('Actor'),
-    Trip = mongoose.model('Trip');
+    Actor = mongoose.model('Actor');
 
 //SponsorshipSchema
 var SponsorshipSchema = new Schema({
@@ -10,11 +9,6 @@ var SponsorshipSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Actor",
       required: 'sponsor actor id required'
-    },
-    tripId:{
-      type: Schema.Types.ObjectId,
-      ref: "Trip",
-      required: 'trip id required'
     },
     banner:{
       data: Buffer, 
@@ -83,4 +77,4 @@ SponsorshipSchema.pre('save', function(next){
 //Devuelve los sposorships que están pagados, ordenados
 SponsorshipSchema.index({sponsorId: 1, paid: 1});
 
-module.exports = mongoose.model('Sponsorships', SponsorshipSchema);
+module.exports = mongoose.model('Sponsorship', SponsorshipSchema);

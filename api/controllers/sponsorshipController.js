@@ -2,7 +2,7 @@
 
 /*---------------SPONSORSHIP----------------------*/
 var mongoose = require('mongoose'),
-    Sponsorship = mongoose.model('Sponsorships');
+    Sponsorship = mongoose.model('Sponsorship');
 
 
 exports.list_all_sponsorships = function (req, res) {
@@ -82,7 +82,7 @@ exports.delete_a_sponsorship = function (req, res) {
     console.log(Date() + ": " + "DELETE /v1/sponsorships/:" + req.params.sponsorshipId);
 
     //Check if the user is SPONSOR
-    Sponsorship.deleteOne({ _id: req.params.sponsorshipId }, function (err, trip) {
+    Sponsorship.deleteOne({ _id: req.params.sponsorshipId }, function (err, sponsorship) {
         if (err) {
             console.log(Date() + ": " + err);
             res.send(err);

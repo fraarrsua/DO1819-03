@@ -31,9 +31,8 @@ var FinderSchema = new Schema({
     ref: "Actor",
     required: 'explorer actor id required'
   },
-  //To save the result in caché
-  results: [Trip.Schema]
-
+  //To save the result in caché 
+  results: [Trip.schema]
 }, { strict: false });
 
 

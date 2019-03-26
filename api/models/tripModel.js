@@ -1,7 +1,8 @@
 'use strict';
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema,
-  Actor = mongoose.model('Actor');
+    Actor = mongoose.model('Actor'),
+    Sponsorship = mongoose.model('Sponsorship');
 const generate = require('nanoid/generate');
 const dateFormat = require('dateformat');
 
