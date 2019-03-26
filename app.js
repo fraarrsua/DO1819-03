@@ -14,9 +14,9 @@ var express = require('express'),
     DataWareHouse = require('./api/models/dataWareHouseModel'),
     globalConfig = require('./api/models/globalConfigModel'),
     DataWareHouseTools = require('./api/controllers/dataWareHouseController'),
-    bodyParser = require('body-parser')
-    admin = require("firebase-admin"),
-    serviceAccount = require("../ASAS-certs/asas-cloudteam-firebase-adminsdk-4oxdu-0115ceb4ac");
+    bodyParser = require('body-parser'),
+    admin = require("firebase-admin");
+    //serviceAccount = require("../ASAS-certs/asas-cloudteam-firebase-adminsdk-4oxdu-0115ceb4ac");
 
     //HTTPS CERTS OPTIONS
     /*const options = {
@@ -28,7 +28,7 @@ var express = require('express'),
 
 // MongoDB URI building
 var mongoDBUser = process.env.mongoDBUser || "admin";
-var mongoDBPass = process.env.mongoDBPass || "admin";
+var mongoDBPass = process.env.mongoDBPass || "";
 var mongoDBCredentials = (mongoDBUser && mongoDBPass) ? mongoDBUser + ":" + mongoDBPass + "@" : "";
 
 var mongoDBHostname = process.env.mongoDBHostname || "localhost";
@@ -55,11 +55,11 @@ app.use(cors());
 
 
 //Fragmento de configuración del SDK de administración
-var adminConfig = {
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://asas-cloudteam.firebaseio.com'
-};
-admin.initializeApp(adminConfig);
+//var adminConfig = {
+  //  credential: admin.credential.cert(serviceAccount),
+   // databaseURL: 'https://asas-cloudteam.firebaseio.com'
+//};
+//admin.initializeApp(adminConfig);
 
 var routesActors = require('./api/routes/actorRoutes');
 var routesSponsorships = require('./api/routes/sponsorshipRoutes');
