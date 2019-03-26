@@ -6,12 +6,12 @@ var Schema = mongoose.Schema,
 
 //SponsorshipSchema
 var SponsorshipSchema = new Schema({
-    sponsorID:{
+    sponsorId:{
       type: Schema.Types.ObjectId,
       ref: "Actor",
       required: 'sponsor actor id required'
     },
-    tripID:{
+    tripId:{
       type: Schema.Types.ObjectId,
       ref: "Trip",
       required: 'trip id required'
@@ -37,7 +37,7 @@ var SponsorshipSchema = new Schema({
 SponsorshipSchema.pre('save', function(next){
 
   var new_sponsorship = this;
-  var sponsor_id = new_sponsorship.sponsorID;
+  var sponsor_id = new_sponsorship.sponsorId;
 
   if(sponsor_id){
     Actor.findOne({_id:sponsor_id}, function(err, res){
@@ -62,7 +62,7 @@ SponsorshipSchema.pre('save', function(next){
 SponsorshipSchema.pre('save', function(next){
 
   var new_sponsorship = this;
-  var trip_id = new_sponsorship.tripID;
+  var trip_id = new_sponsorship.tripId;
 
   if(trip_id){
     Trip.findOne({_id:trip_id}, function(err, res){
@@ -81,6 +81,6 @@ SponsorshipSchema.pre('save', function(next){
 
 //INDICES
 //Devuelve los sposorships que están pagados, ordenados
-SponsorshipSchema.index({sponsorID: 1, paid: 1});
+SponsorshipSchema.index({sponsorId: 1, paid: 1});
 
 module.exports = mongoose.model('Sponsorships', SponsorshipSchema);

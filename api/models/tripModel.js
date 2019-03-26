@@ -98,7 +98,7 @@ var tripSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Sponsorships"
   }],
-  managerID: {
+  managerId: {
     type: Schema.Types.ObjectId,
     ref: "Actor",
     required: 'manager id required'
@@ -137,7 +137,7 @@ tripSchema.pre('save', function (next) {
 
 tripSchema.pre('findOneAndUpdate', function (next) {
   if (this._update['$set'].status == "CANCELLED") {
-    console.log(Date()+": Changing trip status to CANCELLED.");
+    console.log(Date() + ": Changing trip status to CANCELLED.");
     next();
   } else {
     var stages_price = this._update.stages.map((stage) => stage.price);
@@ -151,7 +151,7 @@ tripSchema.pre('findOneAndUpdate', function (next) {
 tripSchema.pre('save', function (next) {
 
   var new_trip = this;
-  var manager_id = new_trip.managerID;
+  var manager_id = new_trip.managerId;
 
   if (manager_id) {
     Actor.findOne({ _id: manager_id }, function (err, res) {
@@ -172,8 +172,8 @@ tripSchema.pre('save', function (next) {
   }
 });
 
-StageSchema.index({price:1});
-StageSchema.index({title: 'text', description: 'text'});
+StageSchema.index({ price: 1 });
+StageSchema.index({ title: 'text', description: 'text' });
 
 //INDICES
 //Búsqueda por precio de forma ascendente

@@ -46,7 +46,7 @@ var ActorSchema = new Schema({
     type: Boolean,
     default: false
   },
-  finderID: {
+  finderId: {
     type: Schema.Types.ObjectId,
     ref: "Finder"
   },

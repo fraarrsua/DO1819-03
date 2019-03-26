@@ -2,7 +2,8 @@
 
 
 var mongoose = require('mongoose'),
-  Application = mongoose.model('Application');
+  Application = mongoose.model('Application'),
+  Trip = mongoose.model('Trip');
 
 exports.list_all_applications = function (req, res) {
 
@@ -24,7 +25,7 @@ exports.list_all_applications = function (req, res) {
 
 exports.search_user_applications = function (req, res) {
 
-  var userId = req.params.userID;
+  var userId = req.params.userId;
 
   //Search depending on params
   console.log('Searching applications depending on params');
@@ -36,19 +37,33 @@ exports.create_an_application = function (req, res) {
 
   //Check if the actor is EXPLORER
   var new_application = new Application(req.body);
+  var tripId = req.params.tripId;
 
-  //Check if exists one application with the same explorerID and tripID on the request
-
-  new_application.save(function (err, application) {
+  //Check if exists one application with the same explorerId and tripId on the request
+  Trip.findOne({ _id: tripId }, function (err, trip) {
     if (err) {
       console.log(Date() + ": " + err);
-      res.send(err);
-    }
-    else {
-      console.log(Date() + ": " + "Application created.");
-      res.status(201).send(application);
+      res.status(500).send(err);
+    } else {
+      if (trip.status != "PUBLISHED") {
+        console.log(Date() + ": Applying to a trip not published.");
+        res.status(422).send("Applying to a trip not published.");
+      } else {
+        new_application.tripId = tripId;
+        new_application.save(function (err, application) {
+          if (err) {
+            console.log(Date() + ": " + err);
+            res.send(err);
+          }
+          else {
+            console.log(Date() + ": " + "Application created.");
+            res.status(201).send(application);
+          }
+        });
+      }
     }
   });
+
 };
 
 

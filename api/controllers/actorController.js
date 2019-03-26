@@ -204,8 +204,8 @@ exports.update_an_actor_v2 = function(req, res) {
       if (actor.role.includes('EXPLORER') || actor.role.includes('MANAGER') ||actor.role.includes('SPONSOR')){
         var authenticatedUserId = await authController.getUserId(idToken);
         //Si coincide el idToken de firebase con el actor que está intentando actualizar el perfil, se lo permito
-        console.log(Date()+": ActorID checked with idToken: "+ authenticatedUserId);
-        console.log(Date()+": ActorID by params:"+ req.params.actorId);
+        console.log(Date()+": ActorId checked with idToken: "+ authenticatedUserId);
+        console.log(Date()+": ActorId by params:"+ req.params.actorId);
         if (authenticatedUserId == req.params.actorId){
           Actor.findOneAndUpdate({_id: req.params.actorId}, req.body, {new: true}, function(err, actor) {
             if (err){

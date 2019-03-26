@@ -39,7 +39,7 @@ exports.list_all_finders = function (req, res) {
 
 exports.read_a_finder = function (req, res) {
   console.log(Date() + ": " + "GET /v1/finders/:finderId");
-  Finder.findById(req.params.finderID, function (err, finder) {
+  Finder.findById(req.params.finderId, function (err, finder) {
     if (err) {
       console.log(Date() + ": " + err);
       res.send(err);
@@ -53,9 +53,9 @@ exports.read_a_finder = function (req, res) {
 
 exports.update_a_finder = function (req, res) {
   //Check that the user is administrator if it is updating more things than comments and if not: res.status(403); "an access token is valid, but requires more privileges"
-  console.log(Date() + ": " + "PUT /v1/finders/:finderID");
+  console.log(Date() + ": " + "PUT /v1/finders/:finderId");
 
-  Finder.findOneAndUpdate({ _id: req.params.finderID }, req.body, { new: true }, function (err, finderUpdated) {
+  Finder.findOneAndUpdate({ _id: req.params.finderId }, req.body, { new: true }, function (err, finderUpdated) {
     if (err) {
       console.log(Date() + ": " + err);
       res.send(err);
@@ -66,6 +66,17 @@ exports.update_a_finder = function (req, res) {
     }
   });
 };
+
+
+
+
+/**--------V2 METHODS---------------- */
+
+exports.list_all_finders_v2= function (req, res) {};
+exports.post_a_finder_v2= function (req, res) {};
+exports.read_a_finder_v2= function (req, res) {};
+exports.update_a_finder_v2= function (req, res) {};
+
 
 
 

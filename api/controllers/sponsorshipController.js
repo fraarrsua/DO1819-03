@@ -77,32 +77,6 @@ exports.update_a_sponsorship = function (req, res) {
     });
 }
 
-exports.set_the_price = function (req, res) {
-    //Check if the user is ADMINISTRATOR
-    console.log(Date() + ": " + "PUT /v1/sponsorships/:sponsorshipsId/price");
-
-    var sponsorShipToPriceId = req.params.sponsorshipsId;
-    var sponsorShipPrice = req.body.price;
-    Sponsorship.findById(sponsorShipToPriceId, function (err, sponsorShipToPrice) {
-        if (err) {
-            console.log(Date() + ": " + err);
-            res.send(err);
-        } else {
-            Sponsorship.findOneAndUpdate({ _id: req.params.sponsorshipsId }, { $set: { "price": sponsorShipPrice } }, { new: true }, function (err, sponsorship) {
-                if (err) {
-                    console.log(Date() + ": " + err);
-                    res.send(err);
-                }
-                else {
-                    console.log(Date() + ": " + "Sponsorship price settle to: "+ sponsorship.price);
-                    res.status(200).send(sponsorship);
-                }
-            });
-        }
-
-    });
-}
-
 exports.delete_a_sponsorship = function (req, res) {
 
     console.log(Date() + ": " + "DELETE /v1/sponsorships/:" + req.params.sponsorshipId);
@@ -118,3 +92,36 @@ exports.delete_a_sponsorship = function (req, res) {
         }
     });
 }
+
+exports.pay_a_sponsorship = function (req,res){
+    console.log(Date() + ": " + "PUT /v1/sponsorships/:sponsorshipId/pay");
+
+    var sposorshipId = req.params.sposorshipId;
+
+    if(!sposorshipId){
+        console.log(Date()+": SponsorId params does not exists");
+        res.status(400).send("Bad Request. SponsorId Param required");
+    }else{
+        Sponsorship.findOneAndUpdate({_id:sposorshipId}, 
+            {$set:{paid: true}}, {new:true}, 
+            function(err, sponsorship){
+                if (err) {
+                    console.log(Date() + ": " + err);
+                    res.send(err);
+                }else{
+                    res.json(sponsorship)
+                }   
+        })
+    }
+
+}
+
+
+/**-----------------V2 METHODS ------------------ */
+
+exports.list_all_sponsorships_v2 = function (req, res) {};
+exports.create_a_sponsorship_v2 = function (req, res) {};
+exports.read_a_sponsorship_v2 = function (req, res) {};
+exports.update_a_sponsorship_v2 = function (req, res) {};
+exports.delete_a_sponsorship_v2 = function (req, res) {};
+exports.pay_a_sponsorship_v2 = function (req, res) {};

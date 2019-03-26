@@ -41,12 +41,12 @@ var applicationSchema = new mongoose.Schema({
     type: String
   },
   comments: [String],
-  explorerID: {
+  explorerId: {
     type: Schema.Types.ObjectId,
     ref: "Actor",
     required: 'explorer id required'
   },
-  tripID: {
+  tripId: {
     type: Schema.Types.ObjectId,
     ref: "Trip",
     required: 'trip id required'
@@ -58,7 +58,7 @@ var applicationSchema = new mongoose.Schema({
 applicationSchema.pre('save', function(next){
 
   var new_application = this;
-  var explorer_id = new_application.explorerID;
+  var explorer_id = new_application.explorerId;
 
   if(explorer_id){
     Actor.findOne({_id:explorer_id}, function(err, res){
@@ -83,7 +83,7 @@ applicationSchema.pre('save', function(next){
 applicationSchema.pre('save', function(next){
 
   var new_application = this;
-  var trip_id = new_application.tripID;
+  var trip_id = new_application.tripId;
 
   if(trip_id){
     Trip.findOne({_id:trip_id}, function(err, res){
@@ -104,7 +104,7 @@ applicationSchema.index({status: 'text'});
 
 //INDICES
 //Búsqueda por estado devuelve applications ordenadas por viaje
-applicationSchema.index({tripID:1, status: 'text'});
+applicationSchema.index({tripId:1, status: 'text'});
 
 
 

@@ -264,7 +264,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\":\"Viaje a París\",\n\t\"description\":\"Viaje a la ciudad del amor donde podrás disfutar de otras paradas previas.\",\n\t\"dateInit\": \"2019-05-04T14:48:00.000\",\n\t\"dateEnd\": \"2019-05-10T14:48:00.000\",\n\t\"stages\": [\n\t\t{\n\t\t\t\"title\":\"Sevilla\",\n\t\t\t\"description\":\"Salida desde Sevilla\",\n\t\t\t\"price\": 0,\n\t\t\t\"dateInit\": \"2019-05-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Madrid\",\n\t\t\t\"description\":\"Parada en Madrid\",\n\t\t\t\"price\": 20,\n\t\t\t\"dateInit\": \"2019-05-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Barcelona\",\n\t\t\t\"description\":\"Parada en Barcelona\",\n\t\t\t\"price\": 60,\n\t\t\t\"dateInit\": \"2019-05-05T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Burdeos\",\n\t\t\t\"description\":\"Parada en Burdeos\",\n\t\t\t\"price\": 120,\n\t\t\t\"dateInit\": \"2019-05-06T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"París\",\n\t\t\t\"description\":\"Parada en París\",\n\t\t\t\"price\": 340,\n\t\t\t\"dateInit\": \"2019-05-07T14:48:00.000\"\n\t\t}],\n\t\"comments\":[\n\t\t{\n\t\t\t\"title\": \"Me encantó\",\n\t\t\t\"author\": \"randomX\",\n\t\t\t\"commentText\":\"Estuve en este viaje el año pasado con mi pareja y nos gustó mucho.\"\n\t\t},\n\t\t{\n\t\t\t\"title\": \"Decepcionante\",\n\t\t\t\"author\": \"randomX1\",\n\t\t\t\"commentText\":\"Esta agencia no sabe organizar viajes.\"\n\t\t}],\n\t\"managerID\": \"5c75c1bc4897633db069e9b1\"\n\t\n}"
+							"raw": "{\n\t\"title\":\"Viaje a París\",\n\t\"description\":\"Viaje a la ciudad del amor donde podrás disfutar de otras paradas previas.\",\n\t\"dateInit\": \"2019-05-04T14:48:00.000\",\n\t\"dateEnd\": \"2019-05-10T14:48:00.000\",\n\t\"stages\": [\n\t\t{\n\t\t\t\"title\":\"Sevilla\",\n\t\t\t\"description\":\"Salida desde Sevilla\",\n\t\t\t\"price\": 0,\n\t\t\t\"dateInit\": \"2019-05-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Madrid\",\n\t\t\t\"description\":\"Parada en Madrid\",\n\t\t\t\"price\": 20,\n\t\t\t\"dateInit\": \"2019-05-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Barcelona\",\n\t\t\t\"description\":\"Parada en Barcelona\",\n\t\t\t\"price\": 60,\n\t\t\t\"dateInit\": \"2019-05-05T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Burdeos\",\n\t\t\t\"description\":\"Parada en Burdeos\",\n\t\t\t\"price\": 120,\n\t\t\t\"dateInit\": \"2019-05-06T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"París\",\n\t\t\t\"description\":\"Parada en París\",\n\t\t\t\"price\": 340,\n\t\t\t\"dateInit\": \"2019-05-07T14:48:00.000\"\n\t\t}],\n\t\"comments\":[\n\t\t{\n\t\t\t\"title\": \"Me encantó\",\n\t\t\t\"author\": \"randomX\",\n\t\t\t\"commentText\":\"Estuve en este viaje el año pasado con mi pareja y nos gustó mucho.\"\n\t\t},\n\t\t{\n\t\t\t\"title\": \"Decepcionante\",\n\t\t\t\"author\": \"randomX1\",\n\t\t\t\"commentText\":\"Esta agencia no sabe organizar viajes.\"\n\t\t}],\n\t\"managerId\": \"5c75c1bc4897633db069e9b1\"\n\t\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/v1/trips",
@@ -341,7 +341,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\":\"Viaje a Bruselas\",\n\t\"description\":\"Viaje a la cápital de Europa.\",\n\t\"dateInit\": \"2019-06-04T14:48:00.000\",\n\t\"dateEnd\": \"2019-06-10T14:48:00.000\",\n\t\"stages\": [\n\t\t{\n\t\t\t\"title\":\"Sevilla\",\n\t\t\t\"description\":\"Salida desde Sevilla\",\n\t\t\t\"price\": 0,\n\t\t\t\"dateInit\": \"2019-06-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Madrid\",\n\t\t\t\"description\":\"Parada en Madrid\",\n\t\t\t\"price\": 20,\n\t\t\t\"dateInit\": \"2019-06-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Bruselas\",\n\t\t\t\"description\":\"Parada en Bruselas\",\n\t\t\t\"price\": 120,\n\t\t\t\"dateInit\": \"2019-06-05T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Gante\",\n\t\t\t\"description\":\"Parada en Gante\",\n\t\t\t\"price\": 1400,\n\t\t\t\"dateInit\": \"2019-06-06T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Brujas\",\n\t\t\t\"description\":\"Parada en Brujas\",\n\t\t\t\"price\": 90,\n\t\t\t\"dateInit\": \"2019-06-07T14:48:00.000\"\n\t\t}],\n\t\"comments\":[\n\t\t{\n\t\t\t\"title\": \"Me encantó\",\n\t\t\t\"author\": \"randomX\",\n\t\t\t\"commentText\":\"Estuve en este viaje el año pasado con mi pareja y nos gustó mucho.\"\n\t\t},\n\t\t{\n\t\t\t\"title\": \"Decepcionante\",\n\t\t\t\"author\": \"randomX1\",\n\t\t\t\"commentText\":\"Esta agencia no sabe organizar viajes.\"\n\t\t}],\n\t\"managerID\": \"5c75c1c54897633db069e9b2\"\n\t\n}"
+							"raw": "{\n\t\"title\":\"Viaje a Bruselas\",\n\t\"description\":\"Viaje a la cápital de Europa.\",\n\t\"dateInit\": \"2019-06-04T14:48:00.000\",\n\t\"dateEnd\": \"2019-06-10T14:48:00.000\",\n\t\"stages\": [\n\t\t{\n\t\t\t\"title\":\"Sevilla\",\n\t\t\t\"description\":\"Salida desde Sevilla\",\n\t\t\t\"price\": 0,\n\t\t\t\"dateInit\": \"2019-06-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Madrid\",\n\t\t\t\"description\":\"Parada en Madrid\",\n\t\t\t\"price\": 20,\n\t\t\t\"dateInit\": \"2019-06-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Bruselas\",\n\t\t\t\"description\":\"Parada en Bruselas\",\n\t\t\t\"price\": 120,\n\t\t\t\"dateInit\": \"2019-06-05T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Gante\",\n\t\t\t\"description\":\"Parada en Gante\",\n\t\t\t\"price\": 1400,\n\t\t\t\"dateInit\": \"2019-06-06T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Brujas\",\n\t\t\t\"description\":\"Parada en Brujas\",\n\t\t\t\"price\": 90,\n\t\t\t\"dateInit\": \"2019-06-07T14:48:00.000\"\n\t\t}],\n\t\"comments\":[\n\t\t{\n\t\t\t\"title\": \"Me encantó\",\n\t\t\t\"author\": \"randomX\",\n\t\t\t\"commentText\":\"Estuve en este viaje el año pasado con mi pareja y nos gustó mucho.\"\n\t\t},\n\t\t{\n\t\t\t\"title\": \"Decepcionante\",\n\t\t\t\"author\": \"randomX1\",\n\t\t\t\"commentText\":\"Esta agencia no sabe organizar viajes.\"\n\t\t}],\n\t\"managerId\": \"5c75c1c54897633db069e9b2\"\n\t\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/v1/trips/5c75cb54e8c2f617f0ff9d54",
@@ -372,7 +372,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\":\"Viaje a Bruselas\",\n\t\"description\":\"Viaje a la cápital de Europa.\",\n\t\"dateInit\": \"2019-06-04T14:48:00.000\",\n\t\"dateEnd\": \"2019-06-10T14:48:00.000\",\n\t\"stages\": [\n\t\t{\n\t\t\t\"title\":\"Sevilla\",\n\t\t\t\"description\":\"Salida desde Sevilla\",\n\t\t\t\"price\": 0,\n\t\t\t\"dateInit\": \"2019-06-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Madrid\",\n\t\t\t\"description\":\"Parada en Madrid\",\n\t\t\t\"price\": 20,\n\t\t\t\"dateInit\": \"2019-06-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Bruselas\",\n\t\t\t\"description\":\"Parada en Bruselas\",\n\t\t\t\"price\": 120,\n\t\t\t\"dateInit\": \"2019-06-05T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Gante\",\n\t\t\t\"description\":\"Parada en Gante\",\n\t\t\t\"price\": 1400,\n\t\t\t\"dateInit\": \"2019-06-06T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Brujas\",\n\t\t\t\"description\":\"Parada en Brujas\",\n\t\t\t\"price\": 90,\n\t\t\t\"dateInit\": \"2019-06-07T14:48:00.000\"\n\t\t}],\n\t\"comments\":[\n\t\t{\n\t\t\t\"title\": \"Me encantó\",\n\t\t\t\"author\": \"randomX\",\n\t\t\t\"commentText\":\"Estuve en este viaje el año pasado con mi pareja y nos gustó mucho.\"\n\t\t},\n\t\t{\n\t\t\t\"title\": \"Decepcionante\",\n\t\t\t\"author\": \"randomX1\",\n\t\t\t\"commentText\":\"Esta agencia no sabe organizar viajes.\"\n\t\t}],\n\t\"managerID\": \"5c75c1c54897633db069e9b2\"\n\t\n}"
+							"raw": "{\n\t\"title\":\"Viaje a Bruselas\",\n\t\"description\":\"Viaje a la cápital de Europa.\",\n\t\"dateInit\": \"2019-06-04T14:48:00.000\",\n\t\"dateEnd\": \"2019-06-10T14:48:00.000\",\n\t\"stages\": [\n\t\t{\n\t\t\t\"title\":\"Sevilla\",\n\t\t\t\"description\":\"Salida desde Sevilla\",\n\t\t\t\"price\": 0,\n\t\t\t\"dateInit\": \"2019-06-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Madrid\",\n\t\t\t\"description\":\"Parada en Madrid\",\n\t\t\t\"price\": 20,\n\t\t\t\"dateInit\": \"2019-06-04T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Bruselas\",\n\t\t\t\"description\":\"Parada en Bruselas\",\n\t\t\t\"price\": 120,\n\t\t\t\"dateInit\": \"2019-06-05T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Gante\",\n\t\t\t\"description\":\"Parada en Gante\",\n\t\t\t\"price\": 1400,\n\t\t\t\"dateInit\": \"2019-06-06T14:48:00.000\"\n\t\t},\n\t\t{\n\t\t\t\"title\":\"Brujas\",\n\t\t\t\"description\":\"Parada en Brujas\",\n\t\t\t\"price\": 90,\n\t\t\t\"dateInit\": \"2019-06-07T14:48:00.000\"\n\t\t}],\n\t\"comments\":[\n\t\t{\n\t\t\t\"title\": \"Me encantó\",\n\t\t\t\"author\": \"randomX\",\n\t\t\t\"commentText\":\"Estuve en este viaje el año pasado con mi pareja y nos gustó mucho.\"\n\t\t},\n\t\t{\n\t\t\t\"title\": \"Decepcionante\",\n\t\t\t\"author\": \"randomX1\",\n\t\t\t\"commentText\":\"Esta agencia no sabe organizar viajes.\"\n\t\t}],\n\t\"managerId\": \"5c75c1c54897633db069e9b2\"\n\t\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/v1/trips/5c75cf7ebf09685d840b02d1",
@@ -408,7 +408,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"sponsorID\":\"5c75c2474897633db069e9b8\",\n\t\"tripID\": \"5c75cf46bf09685d840b02c9\",\n\t\"banner\": null,\n\t\"link\":\"linkfake2.com\"\n}"
+							"raw": "{\n\t\"sponsorId\":\"5c75c2474897633db069e9b8\",\n\t\"tripId\": \"5c75cf46bf09685d840b02c9\",\n\t\"banner\": null,\n\t\"link\":\"linkfake2.com\"\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/v1/sponsorships",
@@ -531,7 +531,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"sponsorID\":\"5c75c2474897633db069e9b8\",\n\t\"tripID\": \"5c75cf46bf09685d840b02c9\",\n\t\"banner\": null,\n\t\"link\":\"linkfakeUpdated.com\"\n}"
+							"raw": "{\n\t\"sponsorId\":\"5c75c2474897633db069e9b8\",\n\t\"tripId\": \"5c75cf46bf09685d840b02c9\",\n\t\"banner\": null,\n\t\"link\":\"linkfakeUpdated.com\"\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/v1/sponsorships/5c75d8f44363490130db5296",
@@ -567,7 +567,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"comments\":[\"Quiero ir en clase business.\",\"¿Me podéis confirmar?\"],\n\t\"explorerID\": \"5c75c18b4897633db069e9af\",\n\t\"tripID\": \"5c75cf46bf09685d840b02c9\"\n}"
+							"raw": "{\n\t\"comments\":[\"Quiero ir en clase business.\",\"¿Me podéis confirmar?\"],\n\t\"explorerId\": \"5c75c18b4897633db069e9af\",\n\t\"tripId\": \"5c75cf46bf09685d840b02c9\"\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/v1/applications",
@@ -658,7 +658,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"comments\":[\"Quiero ir en clase business.\",\"¿Me podéis confirmar?\",\"Esto es una actualización\"],\n\t\"explorerID\": \"5c75c18b4897633db069e9af\",\n\t\"tripID\": \"5c75cf46bf09685d840b02c9\"\n}"
+							"raw": "{\n\t\"comments\":[\"Quiero ir en clase business.\",\"¿Me podéis confirmar?\",\"Esto es una actualización\"],\n\t\"explorerId\": \"5c75c18b4897633db069e9af\",\n\t\"tripId\": \"5c75cf46bf09685d840b02c9\"\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/v1/applications/5c75d6459963b843bce23e6b",
@@ -694,7 +694,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"keyword\":\"Málaga\",\n\t\"priceMin\": 100,\n\t\"priceMax\": 400,\n\t\"dateInit\": \"2019-05-20T14:48:00.000\",\n\t\"dateEnd\": \"2019-05-25T14:48:00.000\",\n\t\"explorerID\": \"5c75c18b4897633db069e9af\"\n}"
+							"raw": "{\n\t\"keyword\":\"Málaga\",\n\t\"priceMin\": 100,\n\t\"priceMax\": 400,\n\t\"dateInit\": \"2019-05-20T14:48:00.000\",\n\t\"dateEnd\": \"2019-05-25T14:48:00.000\",\n\t\"explorerId\": \"5c75c18b4897633db069e9af\"\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/v1/finders",

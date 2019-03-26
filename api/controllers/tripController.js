@@ -43,8 +43,8 @@ exports.create_a_trip = function (req, res) {
 
 exports.read_a_trip = function (req, res) {
 
-  console.log(Date() + ": " + "GET /v1/trips/:tripID");
-  Trip.findById(req.params.tripID, function (err, trip) {
+  console.log(Date() + ": " + "GET /v1/trips/:tripId");
+  Trip.findById(req.params.tripId, function (err, trip) {
     if (err) {
       console.log(Date() + ": " + err);
       res.send(err);
@@ -59,9 +59,9 @@ exports.read_a_trip = function (req, res) {
 
 exports.update_a_trip = function (req, res) {
 
-  console.log(Date() + ": " + "PUT /v1/trips/:tripID");
+  console.log(Date() + ": " + "PUT /v1/trips/:tripId");
 
-  var tripToEditId = req.params.tripID;
+  var tripToEditId = req.params.tripId;
   Trip.findById(tripToEditId, function (err, tripToEdit) {
     if (err) {
       console.log(Date() + ": " + err);
@@ -71,7 +71,7 @@ exports.update_a_trip = function (req, res) {
         console.log(Date() + ": " + " WARNING. Trying to edit a trip that is PUBLISHED");
         res.sendStatus(403);
       } else {
-        Trip.findOneAndUpdate({ _id: req.params.tripID }, req.body, { new: true }, function (err, trip) {
+        Trip.findOneAndUpdate({ _id: req.params.tripId }, req.body, { new: true }, function (err, trip) {
           if (err) {
             console.log(Date() + ": " + err);
             res.send(err);
@@ -89,9 +89,9 @@ exports.update_a_trip = function (req, res) {
 
 exports.delete_a_trip = function (req, res) {
 
-  console.log(Date() + ": " + "DELETE /v1/trips/:tripID");
+  console.log(Date() + ": " + "DELETE /v1/trips/:tripId");
 
-  var tripToDeleteId = req.params.tripID;
+  var tripToDeleteId = req.params.tripId;
   Trip.findById(tripToDeleteId, function (err, tripToDelete) {
     if (err) {
       console.log(Date() + ": " + err);
@@ -101,7 +101,7 @@ exports.delete_a_trip = function (req, res) {
         console.log(Date() + ": " + " WARNING. Trying to cancel a trip that is PUBLISHED");
         res.sendStatus(403);
       } else {
-        Trip.deleteOne({ _id: req.params.tripID }, function (err, trip) {
+        Trip.deleteOne({ _id: req.params.tripId }, function (err, trip) {
           if (err) {
             console.log(Date() + ": " + err);
             res.send(err);
@@ -119,10 +119,10 @@ exports.delete_a_trip = function (req, res) {
 
 exports.cancel_a_trip = function (req, res) {
 
-  console.log(Date() + ": " + "PUT /v1/trips/:tripID/cancel");
+  console.log(Date() + ": " + "PUT /v1/trips/:tripId/cancel");
 
   var cancelledReason = req.body.cancelledReason;
-  var tripToCancelId = req.params.tripID;
+  var tripToCancelId = req.params.tripId;
 
   if (!cancelledReason) {
     console.log(Date() + ": " + " WARNING. Trying to cancel a trip without cancelledReason");
@@ -137,7 +137,7 @@ exports.cancel_a_trip = function (req, res) {
           console.log(Date() + ": " + " WARNING. Trying to cancel a trip STARTED");
           res.sendStatus(403);
         } else {
-          Application.find({ tripID: req.params.tripID, status: "ACCEPTED" }, function (err, data) {
+          Application.find({ tripId: req.params.tripId, status: "ACCEPTED" }, function (err, data) {
             if (err) {
               console.log(Date() + ": " + err);
               res.send(err);
@@ -146,7 +146,7 @@ exports.cancel_a_trip = function (req, res) {
                 onsole.log(Date() + ": " + " WARNING. Trying to cancel a trip with accepted applications");
                 res.sendStatus(403);
               } else {
-                Trip.findOneAndUpdate({ _id: req.params.tripID },
+                Trip.findOneAndUpdate({ _id: req.params.tripId },
                   { $set: { "status": "CANCELLED", "cancelledReason": cancelledReason } },
                   { new: true },
                   function (err, trip) {

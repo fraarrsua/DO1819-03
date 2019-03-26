@@ -7,17 +7,28 @@ module.exports = function (app) {
   /**
    * Get all applications
    *    RequiredRoles: to be a manager
-   * 
-   * Post an application 
-   *    RequiredRoles: to be a explorer 
-   *    RequiredStatus: tripStatus --> PUBLISHED
    *
    * @section applications
    * @type get post
    * @url /v1/applications
   */
   app.route('/v1/applications')
-    .get(application.list_all_applications)
+    .get(application.list_all_applications);
+
+  /**
+* Get all applications
+*    RequiredRoles: to be a manager
+* 
+* Post an application 
+*    RequiredRoles: to be a explorer 
+*    RequiredStatus: tripStatus --> PUBLISHED && !STARTED && !CANCELLED
+*
+* @section applications
+* @type get post
+* @param tripId
+* @url /v1/applications
+*/
+  app.route('/v1/applications/:tripId')
     .post(application.create_an_application);
 
   /**
@@ -63,19 +74,19 @@ module.exports = function (app) {
   app.route('/v1/applications/:applicationId/pay')
     .put(application.pay_an_application);
 
-    /**
-    * 
-    * Put to cancel an application
-    *    Change the status=CANCELLED only if status=ACCEPTED
-    *    RequiredRole: to be an EXPLORER
-    *
-    * @section applications
-    * @type put
-    * @url /v1/applications/:applicationId/cancel
-    * @param {string} applicationId
-   */
+  /**
+  * 
+  * Put to cancel an application
+  *    Change the status=CANCELLED only if status=ACCEPTED
+  *    RequiredRole: to be an EXPLORER
+  *
+  * @section applications
+  * @type put
+  * @url /v1/applications/:applicationId/cancel
+  * @param {string} applicationId
+ */
   app.route('/v1/applications/:applicationId/cancel')
-  .put(application.cancel_an_application);
+    .put(application.cancel_an_application);
 
 
 
@@ -132,19 +143,19 @@ module.exports = function (app) {
   app.route('/v2/applications/:applicationId/pay')
     .put(authController.verifyUser(["EXPLORER"]), application.pay_an_application_v2);
 
-        /**
-    * 
-    * Put to cancel an application
-    *    Change the status=CANCELLED only if status=ACCEPTED
-    *    RequiredRole: to be an EXPLORER
-    *
-    * @section applications
-    * @type put
-    * @url /v2/applications/:applicationId/cancel
-    * @param {string} applicationId
-   */
+  /**
+* 
+* Put to cancel an application
+*    Change the status=CANCELLED only if status=ACCEPTED
+*    RequiredRole: to be an EXPLORER
+*
+* @section applications
+* @type put
+* @url /v2/applications/:applicationId/cancel
+* @param {string} applicationId
+*/
   app.route('/v2/applications/:applicationId/cancel')
-  .put(authController.verifyUser(["EXPLORER"]), application.cancel_an_application_v2);
+    .put(authController.verifyUser(["EXPLORER"]), application.cancel_an_application_v2);
 
 };
 

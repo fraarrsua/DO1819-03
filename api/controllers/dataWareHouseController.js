@@ -117,7 +117,7 @@ function computeTripsManagerStats(callback) {
     Trips.aggregate([
         {
             $group: {
-                _id: "managerID",
+                _id: "managerId",
                 tripbyactor: { $sum: 1 }
             }
         },
@@ -143,7 +143,7 @@ function computeApplicationsTripStats(callback) {
     //console.log("Ejecuta computeApplicationsTripStats");
 
     Applications.aggregate([
-        { $group: { _id: "$tripID", applicationTrips: { $sum: 1 } } },
+        { $group: { _id: "$tripId", applicationTrips: { $sum: 1 } } },
         {
             $group: {
                 _id: 0,
@@ -210,7 +210,7 @@ function computeApplicationsRatioPerStatus(callback) {
 function computeAveragePriceFinderStats(callback) {
 
     Finders.aggregate([
-        { $group: { _id: "$explorerID", total: { $sum: 1 } } },
+        { $group: { _id: "$explorerId", total: { $sum: 1 } } },
         {
             $group: {
                 _id: 0,
