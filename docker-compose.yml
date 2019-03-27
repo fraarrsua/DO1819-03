@@ -6,7 +6,7 @@ services:
     environment: 
       - NODE_ENV=${NODE_ENV}
       - PORT=${PORT}
-      - DBPORT=${DBPORT}
+      - mongoDBPort=${mongoDBPort}
       - VIRTUAL_HOST=${VIRTUAL_HOST}
       - VIRTUAL_PORT=${PORT}
     restart: on-failure
@@ -19,10 +19,10 @@ services:
   mongo:
     image: "mongo"
     environment: 
-      - DBPORT=${DBPORT}
+      - mongoDBPort=${mongoDBPort}
     expose:
-      - "${DBPORT}"
-    command: --logpath /var/log/mongodb/mongodb.log --port ${DBPORT}
+      - "${mongoDBPort}"
+    command: --logpath /var/log/mongodb/mongodb.log --port ${mongoDBPort}
     volumes:
       - "dbdata:/data/db"
       - "logsvol:/var/log/mongodb"
